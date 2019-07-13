@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Image, Menu, Form, Input, Icon } from 'semantic-ui-react';
 import './Header.scss';
 import logo from '../../assets/img/logo.jpg';
@@ -6,7 +7,9 @@ import logo from '../../assets/img/logo.jpg';
 const Header = () => (
   <Menu borderless className="top-menu" fixed="top">
     <Menu.Item header className="logo">
-      <Image src={logo} size="tiny" />
+      <Link to="/">
+        <Image src={logo} size="tiny" />
+      </Link>
     </Menu.Item>
     <Menu.Menu className="nav-container">
       <Menu.Item className="search-input">

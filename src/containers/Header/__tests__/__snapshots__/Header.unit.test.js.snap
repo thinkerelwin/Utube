@@ -10,12 +10,16 @@ exports[`renders Header 1`] = `
     className="logo"
     header={true}
   >
-    <Image
-      as="img"
-      size="tiny"
-      src="logo.jpg"
-      ui={true}
-    />
+    <Link
+      to="/"
+    >
+      <Image
+        as="img"
+        size="tiny"
+        src="logo.jpg"
+        ui={true}
+      />
+    </Link>
   </MenuItem>
   <MenuMenu
     className="nav-container"
