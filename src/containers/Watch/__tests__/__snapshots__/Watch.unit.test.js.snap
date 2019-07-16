@@ -12,32 +12,14 @@ exports[`Watch renders 1`] = `
     className="metadata"
     viewCount={1000}
   />
-  <div
+  <VideoInfoBox
     className="video-info-box"
-    style={
-      Object {
-        "background": "#BD10E0",
-        "height": "100px",
-        "width": "100%",
-      }
-    }
-  >
-    Video Info box
-  </div>
-  <div
+  />
+  <Comments
     className="comments"
-    style={
-      Object {
-        "background": "#9013FE",
-        "height": "100px",
-        "width": "100%",
-      }
-    }
-  >
-    comments
-  </div>
+  />
   <RelatedVideos
-    className="related-videos"
+    className="relatedVideos"
   />
 </div>
 `;

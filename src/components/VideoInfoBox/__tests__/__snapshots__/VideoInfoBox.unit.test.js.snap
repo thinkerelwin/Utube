@@ -1,0 +1,136 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VideoInfoBox renders collapsed 1`] = `
+<Fragment>
+  <div
+    className="video-info-box"
+  >
+    <Image
+      as="img"
+      circular={true}
+      className="channel-image"
+      src="http://via.placeholder.com/48x48"
+      ui={true}
+    />
+    <div
+      className="video-info"
+    >
+      <div
+        className="channel-name"
+      >
+        Channel Name
+      </div>
+      <div
+        className="video-publication-date"
+      >
+        Thu 24, 2017
+      </div>
+    </div>
+    <Button
+      as="button"
+      color="youtube"
+    >
+      91.5K Subscribe
+    </Button>
+    <div
+      className="video-description"
+    >
+      <div
+        className="collapsed"
+      >
+         
+        <p>
+          Paragraph 1
+        </p>
+        <p>
+          Paragraph 2
+        </p>
+        <p>
+          Paragraph 3
+        </p>
+        <p>
+          Paragraph 4
+        </p>
+        <p>
+          Paragraph 5
+        </p>
+      </div>
+      <Button
+        as="button"
+        className="content-toggle"
+        compact={true}
+        onClick={[Function]}
+      >
+        Show More
+      </Button>
+    </div>
+  </div>
+  <Divider />
+</Fragment>
+`;
+
+exports[`VideoInfoBox renders expanded 1`] = `
+Array [
+  <div
+    className="video-info-box"
+  >
+    <img
+      className="ui circular image channel-image"
+      src="http://via.placeholder.com/48x48"
+    />
+    <div
+      className="video-info"
+    >
+      <div
+        className="channel-name"
+      >
+        Channel Name
+      </div>
+      <div
+        className="video-publication-date"
+      >
+        Thu 24, 2017
+      </div>
+    </div>
+    <button
+      className="ui youtube button"
+      onClick={[Function]}
+    >
+      91.5K Subscribe
+    </button>
+    <div
+      className="video-description"
+    >
+      <div
+        className="expanded"
+      >
+         
+        <p>
+          Paragraph 1
+        </p>
+        <p>
+          Paragraph 2
+        </p>
+        <p>
+          Paragraph 3
+        </p>
+        <p>
+          Paragraph 4
+        </p>
+        <p>
+          Paragraph 5
+        </p>
+      </div>
+      <button
+        className="ui compact button content-toggle"
+        onClick={[Function]}
+      >
+        Show Less
+      </button>
+    </div>
+  </div>,
+  <div
+    className="ui divider"
+  />,
+]
+`;

@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Comment renders Comment 1`] = `
+<div
+  className="comment"
+>
+  <Image
+    as="img"
+    circular={true}
+    className="user-image"
+    src="http://via.placeholder.com/48x48"
+    ui={true}
+  />
+  <div>
+    <div
+      className="user-name"
+    >
+      User name
+    </div>
+    <span>
+      Comment text
+    </span>
+    <div
+      className="comment-actions"
+    >
+      <Rating
+        likeCount={1}
+      />
+       
+      <Button
+        as="button"
+        compact={true}
+        size="mini"
+      >
+        REPLY
+      </Button>
+    </div>
+  </div>
+</div>
+`;
