@@ -13,7 +13,7 @@ export function AddComment() {
       <Form>
         <Form.TextArea
           control={TextArea}
-          autoHeight
+          // autoHeight //check https://www.npmjs.com/package/react-textarea-autosize if require this feature
           placeholder="Add a public comment"
         />
       </Form>
