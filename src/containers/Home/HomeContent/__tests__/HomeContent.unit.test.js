@@ -1,5 +1,5 @@
 import { shallow } from 'enzyme';
-import { HomeContent } from '../HomeContent';
+import HomeContent from '../HomeContent';
 import React from 'react';
 
 describe('HomeContent', () => {

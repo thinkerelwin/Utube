@@ -8,18 +8,23 @@ import { getYoutubeLibraryLoaded } from '../../store/reducers/api';
 import './Home.scss';
 
 import { SideBar } from '../SideBar/SideBar';
-import { HomeContent } from './HomeContent/HomeContent';
+import HomeContent from './HomeContent/HomeContent';
 class Home extends React.Component {
   componentDidMount() {
     if (this.props.youtubeLibraryLoaded) {
-      this.props.fetchMostPopularVideos();
+      this.fetchCategoriesAndMostPopularVideos();
     }
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.youtubeLibraryLoaded !== prevProps.youtubeLibraryLoaded) {
-      this.props.fetchMostPopularVideos();
+      this.fetchCategoriesAndMostPopularVideos();
     }
+  }
+
+  fetchCategoriesAndMostPopularVideos() {
+    this.props.fetchMostPopularVideos();
+    this.props.fetchVideoCategories();
   }
 
   render() {
@@ -40,12 +45,17 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   const fetchMostPopularVideos = videoActions.mostPopular.request;
-  return bindActionCreators({ fetchMostPopularVideos }, dispatch);
+  const fetchVideoCategories = videoActions.categories.request;
+  return bindActionCreators(
+    { fetchMostPopularVideos, fetchVideoCategories },
+    dispatch
+  );
 }
 
 Home.propTypes = {
   youtubeLibraryLoaded: PropTypes.bool,
-  fetchMostPopularVideos: PropTypes.func
+  fetchMostPopularVideos: PropTypes.func,
+  fetchVideoCategories: PropTypes.func
 };
 
 export default connect(
