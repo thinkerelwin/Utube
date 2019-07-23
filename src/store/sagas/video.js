@@ -61,6 +61,7 @@ export function* fetchMostPopularVideosByCategory(categories) {
     const response = yield all(requests);
     yield put(videoActions.mostPopularByCategory.success(response, categories));
   } catch (error) {
+    // will not catch if all requests are failed
     yield put(videoActions.mostPopularByCategory.failure(error));
   }
 }
