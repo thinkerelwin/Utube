@@ -4,7 +4,10 @@ import {
   VIDEO_CATEGORIES,
   MOST_POPULAR_BY_CATEGORY
 } from '../actions/video';
+import { WATCH_DETAILS } from '../actions/watch';
 import { SUCCESS } from '../actions';
+
+import { VIDEO_LIST_RESPONSE } from '../api/youtube-api-response-types';
 
 export const initialState = {
   byId: {},
@@ -23,6 +26,8 @@ export default function videos(state = initialState, action) {
         action.categories,
         state
       );
+    case WATCH_DETAILS[SUCCESS]:
+      return reduceWatchDetails(action.response, state);
     default:
       return state;
   }
@@ -162,3 +167,24 @@ export const videosByCategoryLoaded = createSelector(
     return Object.keys(videosByCategory || {}).length;
   }
 );
+
+function reduceWatchDetails(responses, prevState) {
+  const videoDetailResponse = responses.find(
+    r => r.result.kind === VIDEO_LIST_RESPONSE
+  );
+  // we know that items will only have one element
+  // because we explicitly asked for a video with a specific id
+  const video = videoDetailResponse.result.items[0];
+
+  return {
+    ...prevState,
+    byId: {
+      ...prevState.byId,
+      [video.id]: video
+    }
+  };
+}
+
+export const getVideoById = (state, videoId) => {
+  return state.videos.byId[videoId];
+};

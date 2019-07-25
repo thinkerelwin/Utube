@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Home from './containers/Home/Home';
-import { Watch } from './containers/Watch/Watch';
+import Watch from './containers/Watch/Watch';
 import { Layout } from './components/Layout/Layout';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -22,7 +22,7 @@ const App = props => {
     function loadYoutubeApi() {
       const script = document.createElement('script');
       script.src = 'https://apis.google.com/js/client.js';
-      const API_KEY = process.env.REACT_APP_YOUTUBE_KEY;
+      const API_KEY = 'AIzaSyDU-wf9jmpi61D1W1Zqw8fs0CVdbDQqCL0';
 
       script.onload = () => {
         window.gapi.load('client', () => {
