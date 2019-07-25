@@ -17,7 +17,6 @@ export class VideoPreview extends React.Component {
     if (!video) {
       return <div />;
     }
-
     const duration = video.contentDetails
       ? video.contentDetails.duration
       : null;
