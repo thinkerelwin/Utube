@@ -22,13 +22,14 @@ class Watch extends React.Component {
   getVideoId() {
     return getSearchParam(this.props.location, 'v');
   }
+
   fetchWatchContent() {
     const videoId = this.getVideoId();
     if (!videoId) {
       this.props.history.push('/');
     }
+    console.log('fetchWatchContent', videoId, this.props.channelId);
     this.props.fetchWatchDetails(videoId, this.props.channelId);
-    //this.props.channelId will get value, but not passed to fetchWatchDetails, maybe due to async problem
   }
   render() {
     const videoId = this.getVideoId();
