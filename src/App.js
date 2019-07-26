@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import Home from './containers/Home/Home';
 import Watch from './containers/Watch/Watch';
 import { Layout } from './components/Layout/Layout';
@@ -42,7 +42,11 @@ const App = props => {
       <Layout>
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/watch" component={Watch} />
+          {/* TODO change fore remount watch to update it */}
+          <Route
+            path="/watch"
+            render={() => <Watch key={props.location.key} />}
+          />
         </Switch>
       </Layout>
     </>
@@ -57,7 +61,9 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({ youtubeLibraryLoaded }, dispatch);
 }
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(App);
+export default withRouter(
+  connect(
+    null,
+    mapDispatchToProps
+  )(App)
+);

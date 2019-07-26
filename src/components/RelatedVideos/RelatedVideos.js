@@ -29,5 +29,3 @@ export function RelatedVideos(props) {
     </div>
   );
 }
-
-// TODO should Updating related videos

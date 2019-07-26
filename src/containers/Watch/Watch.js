@@ -5,6 +5,8 @@ import * as watchActions from '../../store/actions/watch';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getYoutubeLibraryLoaded } from '../../store/reducers/api';
+import { getChannelId } from '../../store/reducers/videos';
+import { getSearchParam } from '../../services/url/index';
 
 class Watch extends React.Component {
   componentDidMount() {
@@ -18,25 +20,26 @@ class Watch extends React.Component {
     }
   }
   getVideoId() {
-    const searchParams = new URLSearchParams(this.props.location.search);
-    return searchParams.get('v');
+    return getSearchParam(this.props.location, 'v');
   }
   fetchWatchContent() {
     const videoId = this.getVideoId();
     if (!videoId) {
       this.props.history.push('/');
     }
-    this.props.fetchWatchDetails(videoId);
+    this.props.fetchWatchDetails(videoId, this.props.channelId);
+    //this.props.channelId will get value, but not passed to fetchWatchDetails, maybe due to async problem
   }
   render() {
     const videoId = this.getVideoId();
-    return <WatchContent videoId={videoId} />;
+    return <WatchContent videoId={videoId} channelId={this.props.channelId} />;
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state, props) {
   return {
-    youtubeLibraryLoaded: getYoutubeLibraryLoaded(state)
+    youtubeLibraryLoaded: getYoutubeLibraryLoaded(state),
+    channelId: getChannelId(state, props.location, 'v')
   };
 }
 
