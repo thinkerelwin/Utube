@@ -4,7 +4,8 @@ import { REQUEST } from '../actions';
 import {
   buildVideoDetailRequest,
   buildRelatedVideosRequest,
-  buildChannelRequest
+  buildChannelRequest,
+  buildCommentThreadRequest
 } from '../api/youtube-api';
 import {
   SEARCH_LIST_RESPONSE,
@@ -16,7 +17,7 @@ export function* watchWatchDetails() {
     const { videoId, channelId } = yield take(
       watchActions.WATCH_DETAILS[REQUEST]
     );
-    console.log('watchWatchDetails', videoId, channelId);
+
     yield fork(fetchWatchDetails, videoId, channelId);
   }
 }
@@ -24,9 +25,9 @@ export function* watchWatchDetails() {
 export function* fetchWatchDetails(videoId, channelId) {
   let requests = [
     buildVideoDetailRequest.bind(null, videoId),
-    buildRelatedVideosRequest.bind(null, videoId)
+    buildRelatedVideosRequest.bind(null, videoId),
+    buildCommentThreadRequest.bind(null, videoId)
   ];
-  console.log('fetchWatchDetails', videoId, channelId);
 
   if (channelId) {
     requests.push(buildChannelRequest.bind(null, channelId));
@@ -34,7 +35,7 @@ export function* fetchWatchDetails(videoId, channelId) {
 
   try {
     const responses = yield all(requests.map(fn => call(fn)));
-    yield put(watchActions.details.success(responses));
+    yield put(watchActions.details.success(responses, videoId));
     yield call(fetchVideoDetails, responses, channelId === null);
   } catch (error) {
     yield put(watchActions.details.failure(error));

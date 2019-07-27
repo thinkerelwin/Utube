@@ -41,12 +41,12 @@ const App = props => {
     <>
       <Layout>
         <Switch>
-          <Route path="/" exact component={Home} />
           {/* TODO change fore remount watch to update it */}
           <Route
             path="/watch"
             render={() => <Watch key={props.location.key} />}
           />
+          <Route path="/" component={Home} />
         </Switch>
       </Layout>
     </>

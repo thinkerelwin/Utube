@@ -5,13 +5,15 @@ import {
   watchVideoCategories
 } from './video';
 import { watchWatchDetails } from './watch';
+import { watchCommentThread } from './comment';
 
 export default function*() {
   yield all([
     fork(watchMostPopularVideos),
     fork(watchVideoCategories),
     fork(watchMostPopularVideosByCategory),
-    fork(watchWatchDetails)
+    fork(watchWatchDetails),
+    fork(watchCommentThread)
   ]);
 }
 
