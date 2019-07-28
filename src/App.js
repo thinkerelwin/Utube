@@ -12,6 +12,8 @@ import { youtubeLibraryLoaded } from './store/actions/api';
 import './assets/style/normalize.css';
 import './assets/style/custom.scss';
 import 'semantic-ui-css/semantic.min.css';
+import Trending from './containers/Trending/Trending';
+import Search from './containers/Search/Search';
 
 const App = props => {
   const { youtubeLibraryLoaded } = props;
@@ -41,12 +43,17 @@ const App = props => {
     <>
       <Layout>
         <Switch>
+          <Route path="/" exact component={Home} />
           {/* TODO change fore remount watch to update it */}
           <Route
             path="/watch"
             render={() => <Watch key={props.location.key} />}
           />
-          <Route path="/" component={Home} />
+          <Route path="/feed/trending" component={Trending} />
+          <Route
+            path="/results"
+            render={() => <Search key={props.location.key} />}
+          />
         </Switch>
       </Layout>
     </>

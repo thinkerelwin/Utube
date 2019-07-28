@@ -11,7 +11,7 @@ function SideBarItem(props) {
   function shouldBeHighlighted() {
     // return true;
     const { pathname } = props.location;
-    console.log('pathname = ', pathname);
+
     if (props.path === '/') {
       return pathname === props.path;
     }
