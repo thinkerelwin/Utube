@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import './Header.scss';
+import PropTypes from 'prop-types';
+import logo from '../../assets/img/logo.jpg';
 import { Link, withRouter } from 'react-router-dom';
 import { Image, Menu, Form, Input, Icon } from 'semantic-ui-react';
-import './Header.scss';
-import logo from '../../assets/img/logo.jpg';
 
 const Header = props => {
   const [queryString, setQueryString] = useState('');
@@ -15,6 +16,7 @@ const Header = props => {
     const escapedSearchQuery = encodeURI(queryString);
     props.history.push(`/results?search_query=${escapedSearchQuery}`);
   };
+
   return (
     <Menu borderless className="top-menu" fixed="top">
       <Menu.Item header className="logo">
@@ -56,6 +58,10 @@ const Header = props => {
       </Menu.Menu>
     </Menu>
   );
+};
+
+Header.propTypes = {
+  history: PropTypes.object
 };
 
 export default withRouter(Header);

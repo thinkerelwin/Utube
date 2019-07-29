@@ -1,7 +1,8 @@
 import React from 'react';
+import './VideoMetadata.scss';
+import PropTypes from 'prop-types';
 import { Button, Divider, Icon } from 'semantic-ui-react';
 import { Rating } from '../Rating/Rating';
-import './VideoMetadata.scss';
 
 export function VideoMetadata(props) {
   if (!props.video || !props.video.statistics) {
@@ -16,8 +17,8 @@ export function VideoMetadata(props) {
         <span>{viewCount} views</span>
         <div className="video-actions">
           <Rating
-            likeCount={props.video.statistics.likeCount}
-            dislikeCount={props.video.statistics.dislikeCount}
+            likeCount={Number(props.video.statistics.likeCount)}
+            dislikeCount={Number(props.video.statistics.dislikeCount)}
           />
           <Button basic icon labelPosition="left">
             <Icon name="share" />
@@ -35,3 +36,7 @@ export function VideoMetadata(props) {
     </div>
   );
 }
+
+VideoMetadata.propTypes = {
+  video: PropTypes.object
+};

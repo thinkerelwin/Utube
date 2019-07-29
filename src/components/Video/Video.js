@@ -1,5 +1,6 @@
 import React from 'react';
 import './Video.scss';
+import PropTypes from 'prop-types';
 
 const BASE_EMBED_URL = 'https://www.youtube.com/embed/';
 
@@ -23,3 +24,7 @@ export function Video(props) {
     </div>
   );
 }
+
+Video.propTypes = {
+  id: PropTypes.string
+};

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './VideoInfoBox.scss';
+import PropTypes from 'prop-types';
 import { Image, Button, Divider } from 'semantic-ui-react';
 import Linkify from 'react-linkify';
 import { getPublishedAtDateString } from '../../services/date/date-format';
@@ -8,7 +9,7 @@ import { getShortNumberString } from '../../services/number/number-format';
 export function VideoInfoBox(props) {
   const [collapsed, setCollapsed] = useState(true);
 
-  if (!props.video) {
+  if (!props.video || !props.channel) {
     return <div />;
   }
 
@@ -37,12 +38,8 @@ export function VideoInfoBox(props) {
   }
 
   function getConfig() {
-    let descriptionTextClass = 'collapsed';
-    let buttonTitle = 'Show More';
-    if (!collapsed) {
-      descriptionTextClass = 'expanded';
-      buttonTitle = 'Show Less';
-    }
+    const descriptionTextClass = collapsed ? 'collapsed' : 'expanded';
+    let buttonTitle = collapsed ? 'Show More' : 'Show Less';
     return {
       descriptionTextClass,
       buttonTitle
@@ -55,10 +52,6 @@ export function VideoInfoBox(props) {
     );
     const subscriberCount = getShortNumberString(parsedSubscriberCount);
     return `Subscribe ${subscriberCount}`;
-  }
-
-  if (!props.video || !props.channel) {
-    return <div />;
   }
 
   const buttonText = getSubscriberButtonText();
@@ -85,3 +78,8 @@ export function VideoInfoBox(props) {
     </>
   );
 }
+
+VideoInfoBox.propTypes = {
+  video: PropTypes.object,
+  channel: PropTypes.object
+};

@@ -1,5 +1,6 @@
 import React from 'react';
 import './VideoGridHeader.scss';
+import PropTypes from 'prop-types';
 
 export function VideoGridHeader(props) {
   return (
@@ -8,3 +9,7 @@ export function VideoGridHeader(props) {
     </div>
   );
 }
+
+VideoGridHeader.propTypes = {
+  title: PropTypes.string
+};

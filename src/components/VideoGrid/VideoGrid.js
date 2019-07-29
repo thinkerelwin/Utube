@@ -1,5 +1,6 @@
 import React from 'react';
 import './VideoGrid.scss';
+import PropTypes from 'prop-types';
 import { VideoGridHeader } from './VideoGridHeader/VideoGridHeader';
 import { Divider } from 'semantic-ui-react';
 import { VideoPreview } from '../VideoPreview/VideoPreview';
@@ -21,10 +22,16 @@ export function VideoGrid(props) {
 
   const divider = props.hideDivider ? null : <Divider />;
   return (
-    <React.Fragment>
+    <>
       <VideoGridHeader title={props.title} />
       <div className="video-grid">{gridItems}</div>
       {divider}
-    </React.Fragment>
+    </>
   );
 }
+
+VideoGrid.propTypes = {
+  videos: PropTypes.array,
+  hideDivider: PropTypes.bool,
+  title: PropTypes.string
+};

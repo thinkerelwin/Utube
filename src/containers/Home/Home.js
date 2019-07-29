@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import './Home.scss';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as videoActions from '../../store/actions/video';
@@ -10,75 +11,76 @@ import {
   videosByCategoryLoaded
 } from '../../store/reducers/videos';
 
-import './Home.scss';
-
 import { SideBar } from '../SideBar/SideBar';
 import HomeContent from './HomeContent/HomeContent';
-class Home extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      categoryIndex: 0
-    };
-  }
-  componentDidMount() {
-    if (this.props.youtubeLibraryLoaded) {
-      this.fetchCategoriesAndMostPopularVideos();
+
+function Home(props) {
+  const [categoryIndex, setCategoryIndex] = useState(0);
+
+  const previousYoutubeLibraryLoaded = UsePrevious(props.youtubeLibraryLoaded);
+  const previousVideoCategories = UsePrevious(props.videoCategories);
+
+  useEffect(() => {
+    if (props.youtubeLibraryLoaded) {
+      fetchCategoriesAndMostPopularVideos();
     }
-  }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  componentDidUpdate(prevProps) {
-    if (this.props.youtubeLibraryLoaded !== prevProps.youtubeLibraryLoaded) {
-      this.fetchCategoriesAndMostPopularVideos();
-    } else if (this.props.videoCategories !== prevProps.videoCategories) {
-      this.fetchVideosByCategory();
+  useEffect(() => {
+    if (previousYoutubeLibraryLoaded !== props.youtubeLibraryLoaded) {
+      fetchCategoriesAndMostPopularVideos();
+    } else if (props.videoCategories !== previousVideoCategories) {
+      fetchVideosByCategory();
     }
+  });
+
+  function UsePrevious(value) {
+    const ref = useRef();
+    useEffect(() => {
+      ref.current = value;
+    });
+    return ref.current;
   }
 
-  fetchCategoriesAndMostPopularVideos() {
-    this.props.fetchMostPopularVideos();
-    this.props.fetchVideoCategories();
+  function fetchCategoriesAndMostPopularVideos() {
+    props.fetchMostPopularVideos();
+    props.fetchVideoCategories();
   }
 
-  fetchVideosByCategory() {
-    const categoryStartIndex = this.state.categoryIndex;
-    const categories = this.props.videoCategories.slice(
+  function fetchVideosByCategory() {
+    const categoryStartIndex = categoryIndex;
+    const categories = props.videoCategories.slice(
       categoryStartIndex,
       categoryStartIndex + 3
     );
-    this.props.fetchMostPopularVideosByCategory(categories);
-    this.setState(prevState => {
-      return {
-        categoryIndex: prevState.categoryIndex + 3
-      };
-    });
+    props.fetchMostPopularVideosByCategory(categories);
+    setCategoryIndex(categoryIndex + 3);
   }
 
-  bottomReachedCallback() {
-    if (!this.props.videoCategoriesLoaded) {
+  function bottomReachedCallback() {
+    if (!props.videoCategoriesLoaded) {
       return;
     }
-    this.fetchVideosByCategory();
+    fetchVideosByCategory();
   }
 
-  shouldShowLoader() {
-    if (this.props.videoCategoriesLoaded && this.props.videosByCategoryLoaded) {
-      return this.state.categoryIndex < this.props.videoCategories.length;
+  function shouldShowLoader() {
+    if (props.videoCategoriesLoaded && props.videosByCategoryLoaded) {
+      return categoryIndex < props.videoCategories.length;
     }
     return false;
   }
 
-  render() {
-    return (
-      <React.Fragment>
-        <SideBar />
-        <HomeContent
-          bottomReachedCallback={this.bottomReachedCallback.bind(this)}
-          showLoader={this.shouldShowLoader()}
-        />
-      </React.Fragment>
-    );
-  }
+  return (
+    <>
+      <SideBar />
+      <HomeContent
+        bottomReachedCallback={bottomReachedCallback}
+        showLoader={shouldShowLoader()}
+      />
+    </>
+  );
 }
 
 function mapStateToProps(state) {
@@ -110,7 +112,9 @@ Home.propTypes = {
   fetchMostPopularVideos: PropTypes.func,
   fetchVideoCategories: PropTypes.func,
   videoCategories: PropTypes.array,
-  fetchMostPopularVideosByCategory: PropTypes.func
+  fetchMostPopularVideosByCategory: PropTypes.func,
+  videoCategoriesLoaded: PropTypes.bool,
+  videosByCategoryLoaded: PropTypes.number
 };
 
 export default connect(

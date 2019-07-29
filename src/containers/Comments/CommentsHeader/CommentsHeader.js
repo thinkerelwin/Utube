@@ -1,6 +1,7 @@
 import React from 'react';
-import { Button, Icon } from 'semantic-ui-react';
 import './CommentsHeader.scss';
+import PropTypes from 'prop-types';
+import { Button, Icon } from 'semantic-ui-react';
 
 export function CommentsHeader(props) {
   return (
@@ -13,3 +14,6 @@ export function CommentsHeader(props) {
     </div>
   );
 }
+CommentsHeader.propTypes = {
+  amountComments: PropTypes.string
+};
