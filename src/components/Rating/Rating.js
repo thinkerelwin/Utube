@@ -1,5 +1,6 @@
 import React from 'react';
 import './Rating.scss';
+import PropTypes from 'prop-types';
 import { Icon, Progress } from 'semantic-ui-react';
 import { getShortNumberString } from '../../services/number/number-format';
 
@@ -33,3 +34,8 @@ export function Rating(props) {
     </div>
   );
 }
+
+Rating.propTypes = {
+  likeCount: PropTypes.number,
+  dislikeCount: PropTypes.number
+};

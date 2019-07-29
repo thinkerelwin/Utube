@@ -1,6 +1,7 @@
 import React from 'react';
-import { VideoPreview } from '../VideoPreview/VideoPreview';
 import './RelatedVideos.scss';
+import PropTypes from 'prop-types';
+import { VideoPreview } from '../VideoPreview/VideoPreview';
 import { NextUpVideo } from './NextUpVideo/NextUpVideo';
 
 export function RelatedVideos(props) {
@@ -29,3 +30,7 @@ export function RelatedVideos(props) {
     </div>
   );
 }
+
+RelatedVideos.propTypes = {
+  videos: PropTypes.array
+};

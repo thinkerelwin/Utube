@@ -1,11 +1,12 @@
 import React from 'react';
 import './NextUpVideo.scss';
+import PropTypes from 'prop-types';
 import { Checkbox, Divider } from 'semantic-ui-react';
 import { VideoPreview } from '../../VideoPreview/VideoPreview';
 
 export function NextUpVideo(props) {
   return (
-    <React.Fragment>
+    <>
       <div className="next-up-container">
         <h4>Up next</h4>
         <div className="up-next-toggle">
@@ -20,6 +21,10 @@ export function NextUpVideo(props) {
         search={`?v=${props.video.id}`}
       />
       <Divider />
-    </React.Fragment>
+    </>
   );
 }
+
+NextUpVideo.propTypes = {
+  video: PropTypes.object
+};
