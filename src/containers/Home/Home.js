@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Home.scss';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -13,6 +13,7 @@ import {
 
 import { SideBar } from '../SideBar/SideBar';
 import HomeContent from './HomeContent/HomeContent';
+import UsePrevious from '../../services/custom-hook';
 
 function Home(props) {
   const [categoryIndex, setCategoryIndex] = useState(0);
@@ -34,14 +35,6 @@ function Home(props) {
       fetchVideosByCategory();
     }
   });
-
-  function UsePrevious(value) {
-    const ref = useRef();
-    useEffect(() => {
-      ref.current = value;
-    });
-    return ref.current;
-  }
 
   function fetchCategoriesAndMostPopularVideos() {
     props.fetchMostPopularVideos();

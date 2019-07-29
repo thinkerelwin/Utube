@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import WatchContent from './WatchContent/WatchContent';
 import { bindActionCreators } from 'redux';
 import * as watchActions from '../../store/actions/watch';
@@ -9,51 +10,52 @@ import { getYoutubeLibraryLoaded } from '../../store/reducers/api';
 import { getChannelId } from '../../store/reducers/videos';
 import { getCommentNextPageToken } from '../../store/reducers/comments';
 import { getSearchParam } from '../../services/url/index';
+import UsePrevious from '../../services/custom-hook';
 
-class Watch extends React.Component {
-  componentDidMount() {
-    if (this.props.youtubeLibraryLoaded) {
-      this.fetchWatchContent();
+function Watch(props) {
+  const previousYoutubeLibraryLoaded = UsePrevious(props.youtubeLibraryLoaded);
+
+  useEffect(() => {
+    if (props.youtubeLibraryLoaded) {
+      fetchWatchContent();
     }
-  }
-  componentDidUpdate(prevProps) {
-    if (this.props.youtubeLibraryLoaded !== prevProps.youtubeLibraryLoaded) {
-      this.fetchWatchContent();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (previousYoutubeLibraryLoaded !== props.youtubeLibraryLoaded) {
+      fetchWatchContent();
     }
-  }
-  getVideoId() {
-    return getSearchParam(this.props.location, 'v');
+  });
+
+  function getVideoId() {
+    return getSearchParam(props.location, 'v');
   }
 
-  fetchWatchContent() {
-    const videoId = this.getVideoId();
+  function fetchWatchContent() {
+    const videoId = getVideoId();
     if (!videoId) {
-      this.props.history.push('/');
+      props.history.push('/');
     }
 
-    this.props.fetchWatchDetails(videoId, this.props.channelId);
+    props.fetchWatchDetails(videoId, props.channelId);
   }
 
-  fetchMoreComments() {
-    if (this.props.nextPageToken) {
-      this.props.fetchCommentThread(
-        this.getVideoId(),
-        this.props.nextPageToken
-      );
+  function fetchMoreComments() {
+    if (props.nextPageToken) {
+      props.fetchCommentThread(getVideoId(), props.nextPageToken);
     }
   }
 
-  render() {
-    const videoId = this.getVideoId();
-    return (
-      <WatchContent
-        videoId={videoId}
-        channelId={this.props.channelId}
-        bottomReachedCallback={this.fetchMoreComments.bind(this)}
-        nextPageToken={this.props.nextPageToken}
-      />
-    );
-  }
+  const videoId = getVideoId();
+  return (
+    <WatchContent
+      videoId={videoId}
+      channelId={props.channelId}
+      bottomReachedCallback={fetchMoreComments}
+      nextPageToken={props.nextPageToken}
+    />
+  );
 }
 
 function mapStateToProps(state, props) {
@@ -72,6 +74,16 @@ function mapDispatchToProps(dispatch) {
     dispatch
   );
 }
+
+Watch.propTypes = {
+  youtubeLibraryLoaded: PropTypes.bool,
+  location: PropTypes.object,
+  history: PropTypes.func,
+  fetchWatchDetails: PropTypes.func,
+  channelId: PropTypes.string,
+  nextPageToken: PropTypes.string,
+  fetchCommentThread: PropTypes.func
+};
 
 export default withRouter(
   connect(

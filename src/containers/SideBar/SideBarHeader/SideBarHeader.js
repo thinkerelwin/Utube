@@ -1,6 +1,7 @@
 import React from 'react';
-import { Menu } from 'semantic-ui-react';
 import './SideBarHeader.scss';
+import PropTypes from 'prop-types';
+import { Menu } from 'semantic-ui-react';
 
 export function SideBarHeader(props) {
   const heading = props.title ? props.title.toUpperCase() : '';
@@ -10,3 +11,7 @@ export function SideBarHeader(props) {
     </Menu.Item>
   );
 }
+
+SideBarHeader.propTypes = {
+  title: PropTypes.string
+};

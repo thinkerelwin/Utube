@@ -1,9 +1,11 @@
 import React from 'react';
-import { Icon, Image, Menu } from 'semantic-ui-react';
 import './Subscription.scss';
+import PropTypes from 'prop-types';
+import { Icon, Image, Menu } from 'semantic-ui-react';
 
 export function Subscription(props) {
-  const { broadcasting, amountNewVideos } = props;
+  const { broadcasting, amountNewVideos, label } = props;
+
   let rightElement = null;
   if (broadcasting) {
     rightElement = <Icon name="signal" />;
@@ -16,10 +18,16 @@ export function Subscription(props) {
       <div className="subscription">
         <div>
           <Image src="http://via.placeholder.com/28x28" avatar />
-          <span>{props.label}</span>
+          <span>{label}</span>
         </div>
         {rightElement}
       </div>
     </Menu.Item>
   );
 }
+
+Subscription.propTypes = {
+  broadcasting: PropTypes.bool,
+  amountNewVideos: PropTypes.number,
+  label: PropTypes.string
+};
