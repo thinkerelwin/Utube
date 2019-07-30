@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import WatchContent from './WatchContent/WatchContent';
 import { bindActionCreators } from 'redux';
@@ -14,16 +14,26 @@ import UsePrevious from '../../services/custom-hook';
 
 function Watch(props) {
   const previousYoutubeLibraryLoaded = UsePrevious(props.youtubeLibraryLoaded);
+  const previousLocationKey = UsePrevious(props.location.search);
+  const [isInitialContentLoaded, setIsInitialContentLoaded] = useState(false);
 
   useEffect(() => {
     if (props.youtubeLibraryLoaded) {
       fetchWatchContent();
+      setIsInitialContentLoaded(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    if (previousYoutubeLibraryLoaded !== props.youtubeLibraryLoaded) {
+    if (
+      previousYoutubeLibraryLoaded !== undefined &&
+      previousYoutubeLibraryLoaded !== props.youtubeLibraryLoaded &&
+      !isInitialContentLoaded
+    ) {
+      fetchWatchContent();
+      setIsInitialContentLoaded(true);
+    } else if (previousLocationKey !== props.location.search) {
       fetchWatchContent();
     }
   });
@@ -78,7 +88,7 @@ function mapDispatchToProps(dispatch) {
 Watch.propTypes = {
   youtubeLibraryLoaded: PropTypes.bool,
   location: PropTypes.object,
-  history: PropTypes.func,
+  history: PropTypes.object,
   fetchWatchDetails: PropTypes.func,
   channelId: PropTypes.string,
   nextPageToken: PropTypes.string,

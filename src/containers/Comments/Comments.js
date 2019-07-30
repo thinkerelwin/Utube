@@ -24,5 +24,5 @@ export function Comments(props) {
 
 Comments.propTypes = {
   comments: PropTypes.array,
-  amountComments: PropTypes.string
+  amountComments: PropTypes.number
 };

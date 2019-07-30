@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { VideoGrid } from '../../../components/VideoGrid/VideoGrid';
 import { InfiniteScroll } from '../../../components/InfiniteScroll/InfiniteScroll';
 import './HomeContent.scss';
@@ -10,34 +11,32 @@ import { connect } from 'react-redux';
 
 const AMOUNT_TRENDING_VIDEOS = 12;
 
-class HomeContent extends React.Component {
-  render() {
-    const trendingVideos = this.getTrendingVideos();
-    const categoryGrids = this.getVideoGridsForCategories();
+function HomeContent(props) {
+  const trendingVideos = getTrendingVideos();
+  const categoryGrids = getVideoGridsForCategories();
 
-    return (
-      <div className="home-content">
-        <div className="responsive-video-grid-container">
-          <InfiniteScroll
-            bottomReachedCallback={this.props.bottomReachedCallback}
-            showLoader={this.props.showLoader}
-          >
-            <VideoGrid title="Trending" videos={trendingVideos} />
-            {categoryGrids}
-          </InfiniteScroll>
-        </div>
+  return (
+    <div className="home-content">
+      <div className="responsive-video-grid-container">
+        <InfiniteScroll
+          bottomReachedCallback={props.bottomReachedCallback}
+          showLoader={props.showLoader}
+        >
+          <VideoGrid title="Trending" videos={trendingVideos} />
+          {categoryGrids}
+        </InfiniteScroll>
       </div>
-    );
+    </div>
+  );
+
+  function getTrendingVideos() {
+    return props.mostPopularVideos.slice(0, AMOUNT_TRENDING_VIDEOS);
   }
 
-  getTrendingVideos() {
-    return this.props.mostPopularVideos.slice(0, AMOUNT_TRENDING_VIDEOS);
-  }
-
-  getVideoGridsForCategories() {
-    const categoryTitles = Object.keys(this.props.videosByCategory || {});
+  function getVideoGridsForCategories() {
+    const categoryTitles = Object.keys(props.videosByCategory || {});
     return categoryTitles.map((categoryTitle, index) => {
-      const videos = this.props.videosByCategory[categoryTitle];
+      const videos = props.videosByCategory[categoryTitle];
       // the last video grid element should not have a divider
       const hideDivider = index === categoryTitles.length - 1;
       return (
@@ -58,6 +57,14 @@ function mapStateToProps(state) {
     mostPopularVideos: getMostPopularVideos(state)
   };
 }
+
+HomeContent.propTypes = {
+  bottomReachedCallback: PropTypes.func,
+  showLoader: PropTypes.bool,
+  mostPopularVideos: PropTypes.array,
+  videosByCategory: PropTypes.object
+};
+
 export default connect(
   mapStateToProps,
   null

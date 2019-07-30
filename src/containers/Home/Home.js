@@ -17,6 +17,7 @@ import UsePrevious from '../../services/custom-hook';
 
 function Home(props) {
   const [categoryIndex, setCategoryIndex] = useState(0);
+  const [isInitialContentLoaded, setIsInitialContentLoaded] = useState(false);
 
   const previousYoutubeLibraryLoaded = UsePrevious(props.youtubeLibraryLoaded);
   const previousVideoCategories = UsePrevious(props.videoCategories);
@@ -24,13 +25,19 @@ function Home(props) {
   useEffect(() => {
     if (props.youtubeLibraryLoaded) {
       fetchCategoriesAndMostPopularVideos();
+      setIsInitialContentLoaded(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    if (previousYoutubeLibraryLoaded !== props.youtubeLibraryLoaded) {
+    if (
+      previousYoutubeLibraryLoaded !== undefined &&
+      previousYoutubeLibraryLoaded !== props.youtubeLibraryLoaded &&
+      !isInitialContentLoaded
+    ) {
       fetchCategoriesAndMostPopularVideos();
+      setIsInitialContentLoaded(true);
     } else if (props.videoCategories !== previousVideoCategories) {
       fetchVideosByCategory();
     }

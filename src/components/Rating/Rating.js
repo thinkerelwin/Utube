@@ -14,7 +14,6 @@ export function Rating(props) {
     const amountDislikes = parseFloat(props.dislikeCount);
     const percentagePositiveRatings =
       100.0 * (amountLikes / (amountLikes + amountDislikes));
-
     // Now that we have calculated the percentage, we bring the numbers into a better readable format
     likeCount = getShortNumberString(amountLikes);
     dislikeCount = getShortNumberString(amountDislikes);

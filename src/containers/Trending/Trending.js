@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Trending.scss';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -15,15 +15,22 @@ import UsePrevious from '../../services/custom-hook';
 
 function Trending(props) {
   const previousYoutubeLibraryLoaded = UsePrevious(props.youtubeLibraryLoaded);
+  const [isInitialContentLoaded, setIsInitialContentLoaded] = useState(false);
 
   useEffect(() => {
     fetchTrendingVideos();
+    setIsInitialContentLoaded(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    if (previousYoutubeLibraryLoaded !== props.youtubeLibraryLoaded) {
+    if (
+      previousYoutubeLibraryLoaded !== undefined &&
+      previousYoutubeLibraryLoaded !== props.youtubeLibraryLoaded &&
+      !isInitialContentLoaded
+    ) {
       fetchTrendingVideos();
+      setIsInitialContentLoaded(true);
     }
   });
 

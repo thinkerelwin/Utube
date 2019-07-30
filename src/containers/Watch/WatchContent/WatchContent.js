@@ -66,7 +66,7 @@ WatchContent.propTypes = {
   video: PropTypes.object,
   channel: PropTypes.object,
   comments: PropTypes.array,
-  amountComments: PropTypes.string,
+  amountComments: PropTypes.number,
   relatedVideos: PropTypes.array
 };
 

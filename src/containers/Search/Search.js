@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Search.scss';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -16,6 +16,7 @@ import UsePrevious from '../../services/custom-hook';
 
 function Search(props) {
   const previousYoutubeApiLoaded = UsePrevious(props.youtubeApiLoaded);
+  const [isInitialContentLoaded, setIsInitialContentLoaded] = useState(false);
 
   useEffect(() => {
     if (!getSearchQuery()) {
@@ -23,12 +24,18 @@ function Search(props) {
       props.history.push('/');
     }
     searchForVideos();
+    setIsInitialContentLoaded(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    if (previousYoutubeApiLoaded !== props.youtubeApiLoaded) {
+    if (
+      previousYoutubeApiLoaded !== undefined &&
+      previousYoutubeApiLoaded !== props.youtubeApiLoaded &&
+      !isInitialContentLoaded
+    ) {
       searchForVideos();
+      setIsInitialContentLoaded(true);
     }
   });
 

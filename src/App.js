@@ -44,12 +44,9 @@ const App = props => {
       <Layout>
         <Switch>
           <Route path="/" exact component={Home} />
-          {/* TODO change fore remount watch to update it */}
-          <Route
-            path="/watch"
-            render={() => <Watch key={props.location.key} />}
-          />
+          <Route path="/watch" component={Watch} />
           <Route path="/feed/trending" component={Trending} />
+          {/* TODO change fore remount watch to update it */}
           <Route
             path="/results"
             render={() => <Search key={props.location.key} />}
@@ -61,7 +58,8 @@ const App = props => {
 };
 
 App.propTypes = {
-  youtubeLibraryLoaded: PropTypes.func
+  youtubeLibraryLoaded: PropTypes.func,
+  location: PropTypes.object
 };
 
 function mapDispatchToProps(dispatch) {

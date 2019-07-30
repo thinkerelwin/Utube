@@ -1,5 +1,6 @@
 import React from 'react';
 import './Comment.scss';
+import PropTypes from 'prop-types';
 import { Button, Image } from 'semantic-ui-react';
 import { Rating } from '../../../components/Rating/Rating';
 
@@ -31,3 +32,7 @@ export function Comment(props) {
     </div>
   );
 }
+
+Comment.propTypes = {
+  comment: PropTypes.object
+};
