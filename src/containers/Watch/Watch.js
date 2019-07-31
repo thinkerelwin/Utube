@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import WatchContent from './WatchContent/WatchContent';
 import { bindActionCreators } from 'redux';
@@ -10,62 +10,55 @@ import { getYoutubeLibraryLoaded } from '../../store/reducers/api';
 import { getChannelId } from '../../store/reducers/videos';
 import { getCommentNextPageToken } from '../../store/reducers/comments';
 import { getSearchParam } from '../../services/url/index';
-import UsePrevious from '../../services/custom-hook';
 
-function Watch(props) {
-  const previousYoutubeLibraryLoaded = UsePrevious(props.youtubeLibraryLoaded);
-  const previousLocationKey = UsePrevious(props.location.search);
-  const [isInitialContentLoaded, setIsInitialContentLoaded] = useState(false);
-
-  useEffect(() => {
-    if (props.youtubeLibraryLoaded) {
-      fetchWatchContent();
-      setIsInitialContentLoaded(true);
+class Watch extends React.Component {
+  constructor(props) {
+    super(props);
+    this.fetchMoreComments = this.fetchMoreComments.bind(this);
+  }
+  componentDidMount() {
+    if (this.props.youtubeLibraryLoaded) {
+      this.fetchWatchContent();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    if (
-      previousYoutubeLibraryLoaded !== undefined &&
-      previousYoutubeLibraryLoaded !== props.youtubeLibraryLoaded &&
-      !isInitialContentLoaded
-    ) {
-      fetchWatchContent();
-      setIsInitialContentLoaded(true);
-    } else if (previousLocationKey !== props.location.search) {
-      fetchWatchContent();
+  }
+  componentDidUpdate(prevProps) {
+    if (this.props.youtubeLibraryLoaded !== prevProps.youtubeLibraryLoaded) {
+      this.fetchWatchContent();
     }
-  });
-
-  function getVideoId() {
-    return getSearchParam(props.location, 'v');
+  }
+  getVideoId() {
+    return getSearchParam(this.props.location, 'v');
   }
 
-  function fetchWatchContent() {
-    const videoId = getVideoId();
+  fetchWatchContent() {
+    const videoId = this.getVideoId();
     if (!videoId) {
-      props.history.push('/');
+      this.props.history.push('/');
     }
 
-    props.fetchWatchDetails(videoId, props.channelId);
+    this.props.fetchWatchDetails(videoId, this.props.channelId);
   }
 
-  function fetchMoreComments() {
-    if (props.nextPageToken) {
-      props.fetchCommentThread(getVideoId(), props.nextPageToken);
+  fetchMoreComments() {
+    if (this.props.nextPageToken) {
+      this.props.fetchCommentThread(
+        this.getVideoId(),
+        this.props.nextPageToken
+      );
     }
   }
 
-  const videoId = getVideoId();
-  return (
-    <WatchContent
-      videoId={videoId}
-      channelId={props.channelId}
-      bottomReachedCallback={fetchMoreComments}
-      nextPageToken={props.nextPageToken}
-    />
-  );
+  render() {
+    const videoId = this.getVideoId();
+    return (
+      <WatchContent
+        videoId={videoId}
+        channelId={this.props.channelId}
+        bottomReachedCallback={this.fetchMoreComments}
+        nextPageToken={this.props.nextPageToken}
+      />
+    );
+  }
 }
 
 function mapStateToProps(state, props) {
@@ -88,7 +81,7 @@ function mapDispatchToProps(dispatch) {
 Watch.propTypes = {
   youtubeLibraryLoaded: PropTypes.bool,
   location: PropTypes.object,
-  history: PropTypes.object,
+  history: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   fetchWatchDetails: PropTypes.func,
   channelId: PropTypes.string,
   nextPageToken: PropTypes.string,

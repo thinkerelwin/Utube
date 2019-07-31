@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './Search.scss';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -12,57 +12,55 @@ import {
 import * as searchActions from '../../store/actions/search';
 import { getSearchParam } from '../../services/url';
 import { VideoList } from '../../components/VideoList/VideoList';
-import UsePrevious from '../../services/custom-hook';
 
-function Search(props) {
-  const previousYoutubeApiLoaded = UsePrevious(props.youtubeApiLoaded);
-  const [isInitialContentLoaded, setIsInitialContentLoaded] = useState(false);
-
-  useEffect(() => {
-    if (!getSearchQuery()) {
+class Search extends React.Component {
+  constructor(props) {
+    super(props);
+    this.bottomReachedCallback = this.bottomReachedCallback.bind(this);
+  }
+  componentDidMount() {
+    if (!this.getSearchQuery()) {
       // redirect to home component if search query is not there
-      props.history.push('/');
+      this.props.history.push('/');
     }
-    searchForVideos();
-    setIsInitialContentLoaded(true);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    this.searchForVideos();
+  }
 
-  useEffect(() => {
-    if (
-      previousYoutubeApiLoaded !== undefined &&
-      previousYoutubeApiLoaded !== props.youtubeApiLoaded &&
-      !isInitialContentLoaded
-    ) {
-      searchForVideos();
-      setIsInitialContentLoaded(true);
+  componentDidUpdate(prevProps) {
+    if (prevProps.youtubeApiLoaded !== this.props.youtubeApiLoaded) {
+      this.searchForVideos();
     }
-  });
-
-  function searchForVideos() {
-    const searchQuery = getSearchQuery();
-    if (props.youtubeApiLoaded) {
-      props.searchForVideos(searchQuery);
+  }
+  searchForVideos() {
+    const searchQuery = this.getSearchQuery();
+    if (this.props.youtubeApiLoaded) {
+      this.props.searchForVideos(searchQuery);
     }
   }
 
-  function getSearchQuery() {
-    return getSearchParam(props.location, 'search_query');
+  getSearchQuery() {
+    return getSearchParam(this.props.location, 'search_query');
   }
 
-  function bottomReachedCallback() {
-    if (props.nextPageToken) {
-      props.searchForVideos(getSearchQuery(), props.nextPageToken, 25);
+  bottomReachedCallback() {
+    if (this.props.nextPageToken) {
+      this.props.searchForVideos(
+        this.getSearchQuery(),
+        this.props.nextPageToken,
+        25
+      );
     }
   }
 
-  return (
-    <VideoList
-      bottomReachedCallback={bottomReachedCallback}
-      showLoader={true}
-      videos={props.searchResults}
-    />
-  );
+  render() {
+    return (
+      <VideoList
+        bottomReachedCallback={this.bottomReachedCallback}
+        showLoader={true}
+        videos={this.props.searchResults}
+      />
+    );
+  }
 }
 
 function mapStateToProps(state, props) {
@@ -81,7 +79,7 @@ function mapDispatchToProps(dispatch) {
 Search.propTypes = {
   youtubeApiLoaded: PropTypes.bool,
   searchForVideos: PropTypes.func,
-  history: PropTypes.func,
+  history: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   location: PropTypes.object,
   nextPageToken: PropTypes.string,
   searchResults: PropTypes.array

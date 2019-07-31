@@ -23,7 +23,7 @@ export function Rating(props) {
     <div className="rating">
       <div>
         <Icon name="thumbs outline up" />
-        <span>{likeCount}</span>
+        <span>{likeCount || ''}</span>
       </div>
       <div>
         <Icon name="thumbs outline down" />

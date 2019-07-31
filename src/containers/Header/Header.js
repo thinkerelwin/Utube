@@ -61,7 +61,7 @@ const Header = props => {
 };
 
 Header.propTypes = {
-  history: PropTypes.object
+  history: PropTypes.oneOfType([PropTypes.object, PropTypes.func])
 };
 
 export default withRouter(Header);

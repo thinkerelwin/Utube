@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './Trending.scss';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -11,55 +11,45 @@ import {
   allMostPopularVideosLoaded
 } from '../../store/reducers/videos';
 import { getYoutubeLibraryLoaded } from '../../store/reducers/api';
-import UsePrevious from '../../services/custom-hook';
 
-function Trending(props) {
-  const previousYoutubeLibraryLoaded = UsePrevious(props.youtubeLibraryLoaded);
-  const [isInitialContentLoaded, setIsInitialContentLoaded] = useState(false);
-
-  useEffect(() => {
-    fetchTrendingVideos();
-    setIsInitialContentLoaded(true);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    if (
-      previousYoutubeLibraryLoaded !== undefined &&
-      previousYoutubeLibraryLoaded !== props.youtubeLibraryLoaded &&
-      !isInitialContentLoaded
-    ) {
-      fetchTrendingVideos();
-      setIsInitialContentLoaded(true);
-    }
-  });
-
-  function fetchTrendingVideos() {
-    if (props.youtubeLibraryLoaded) {
-      props.fetchMostPopularVideos(20, true);
+class Trending extends React.Component {
+  componentDidMount() {
+    this.fetchTrendingVideos();
+  }
+  componentDidUpdate(prevProps) {
+    if (prevProps.youtubeLibraryLoaded !== this.props.youtubeLibraryLoaded) {
+      this.fetchTrendingVideos();
     }
   }
 
-  function shouldShowLoader() {
-    return !props.allMostPopularVideosLoaded;
-  }
-
-  function fetchMoreVideos() {
-    const { nextPageToken } = props;
-    if (props.youtubeLibraryLoaded && nextPageToken) {
-      props.fetchMostPopularVideos(12, true, nextPageToken);
+  fetchTrendingVideos() {
+    if (this.props.youtubeLibraryLoaded) {
+      this.props.fetchMostPopularVideos(20, true);
     }
   }
 
-  const loaderActive = shouldShowLoader();
+  shouldShowLoader() {
+    return !this.props.allMostPopularVideosLoaded;
+  }
 
-  return (
-    <VideoList
-      bottomReachedCallback={fetchMoreVideos}
-      showLoader={loaderActive}
-      videos={props.videos}
-    />
-  );
+  fetchMoreVideos() {
+    const { nextPageToken } = this.props;
+    if (this.props.youtubeLibraryLoaded && nextPageToken) {
+      this.props.fetchMostPopularVideos(12, true, nextPageToken);
+    }
+  }
+
+  render() {
+    const loaderActive = this.shouldShowLoader();
+
+    return (
+      <VideoList
+        bottomReachedCallback={this.fetchMoreVideos}
+        showLoader={loaderActive}
+        videos={this.props.videos}
+      />
+    );
+  }
 }
 
 function mapStateToProps(state) {

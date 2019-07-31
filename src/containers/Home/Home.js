@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import './Home.scss';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as videoActions from '../../store/actions/video';
@@ -11,76 +10,76 @@ import {
   videosByCategoryLoaded
 } from '../../store/reducers/videos';
 
+import './Home.scss';
+
 import { SideBar } from '../SideBar/SideBar';
 import HomeContent from './HomeContent/HomeContent';
-import UsePrevious from '../../services/custom-hook';
-
-function Home(props) {
-  const [categoryIndex, setCategoryIndex] = useState(0);
-  const [isInitialContentLoaded, setIsInitialContentLoaded] = useState(false);
-
-  const previousYoutubeLibraryLoaded = UsePrevious(props.youtubeLibraryLoaded);
-  const previousVideoCategories = UsePrevious(props.videoCategories);
-
-  useEffect(() => {
-    if (props.youtubeLibraryLoaded) {
-      fetchCategoriesAndMostPopularVideos();
-      setIsInitialContentLoaded(true);
+class Home extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      categoryIndex: 0
+    };
+    this.bottomReachedCallback = this.bottomReachedCallback.bind(this);
+  }
+  componentDidMount() {
+    if (this.props.youtubeLibraryLoaded) {
+      this.fetchCategoriesAndMostPopularVideos();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    if (
-      previousYoutubeLibraryLoaded !== undefined &&
-      previousYoutubeLibraryLoaded !== props.youtubeLibraryLoaded &&
-      !isInitialContentLoaded
-    ) {
-      fetchCategoriesAndMostPopularVideos();
-      setIsInitialContentLoaded(true);
-    } else if (props.videoCategories !== previousVideoCategories) {
-      fetchVideosByCategory();
-    }
-  });
-
-  function fetchCategoriesAndMostPopularVideos() {
-    props.fetchMostPopularVideos();
-    props.fetchVideoCategories();
   }
 
-  function fetchVideosByCategory() {
-    const categoryStartIndex = categoryIndex;
-    const categories = props.videoCategories.slice(
+  componentDidUpdate(prevProps) {
+    if (this.props.youtubeLibraryLoaded !== prevProps.youtubeLibraryLoaded) {
+      this.fetchCategoriesAndMostPopularVideos();
+    } else if (this.props.videoCategories !== prevProps.videoCategories) {
+      this.fetchVideosByCategory();
+    }
+  }
+
+  fetchCategoriesAndMostPopularVideos() {
+    this.props.fetchMostPopularVideos();
+    this.props.fetchVideoCategories();
+  }
+
+  fetchVideosByCategory() {
+    const categoryStartIndex = this.state.categoryIndex;
+    const categories = this.props.videoCategories.slice(
       categoryStartIndex,
       categoryStartIndex + 3
     );
-    props.fetchMostPopularVideosByCategory(categories);
-    setCategoryIndex(categoryIndex + 3);
+    this.props.fetchMostPopularVideosByCategory(categories);
+    this.setState(prevState => {
+      return {
+        categoryIndex: prevState.categoryIndex + 3
+      };
+    });
   }
 
-  function bottomReachedCallback() {
-    if (!props.videoCategoriesLoaded) {
+  bottomReachedCallback() {
+    if (!this.props.videoCategoriesLoaded) {
       return;
     }
-    fetchVideosByCategory();
+    this.fetchVideosByCategory();
   }
 
-  function shouldShowLoader() {
-    if (props.videoCategoriesLoaded && props.videosByCategoryLoaded) {
-      return categoryIndex < props.videoCategories.length;
+  shouldShowLoader() {
+    if (this.props.videoCategoriesLoaded && this.props.videosByCategoryLoaded) {
+      return this.state.categoryIndex < this.props.videoCategories.length;
     }
     return false;
   }
 
-  return (
-    <>
-      <SideBar />
-      <HomeContent
-        bottomReachedCallback={bottomReachedCallback}
-        showLoader={shouldShowLoader()}
-      />
-    </>
-  );
+  render() {
+    return (
+      <>
+        <SideBar />
+        <HomeContent
+          bottomReachedCallback={this.bottomReachedCallback}
+          showLoader={this.shouldShowLoader()}
+        />
+      </>
+    );
+  }
 }
 
 function mapStateToProps(state) {
