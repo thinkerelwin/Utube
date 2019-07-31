@@ -6,9 +6,9 @@ export const Subscriptions = () => (
   <>
     <SideBarHeader title="Subscriptions" />
     <Subscription label="MusicChannel" broadcasting />
-    <Subscription label="Coursea" amountNewVideos={10} />
-    <Subscription label="TEDx Talks" amountNewVideos={23} />
-    <Subscription label="Stanford iOS" amountNewVideos={4} />
-    <Subscription label="Udacity" amountNewVideos={114} />
+    <Subscription label="freeCodeCamp" amountNewVideos={10} />
+    <Subscription label="Udemy" amountNewVideos={4} />
+    <Subscription label="Frontend Masters" amountNewVideos={23} />
+    <Subscription label="Academnd" amountNewVideos={16} />
   </>
 );

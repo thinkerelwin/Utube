@@ -44,9 +44,11 @@ const App = props => {
       <Layout>
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/watch" component={Watch} />
+          <Route
+            path="/watch"
+            render={() => <Watch key={props.location.key} />}
+          />
           <Route path="/feed/trending" component={Trending} />
-          {/* TODO change fore remount watch to update it */}
           <Route
             path="/results"
             render={() => <Search key={props.location.key} />}

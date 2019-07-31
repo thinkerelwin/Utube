@@ -11,19 +11,19 @@ exports[`renders Subscriptions 1`] = `
   />
   <Subscription
     amountNewVideos={10}
-    label="Coursea"
-  />
-  <Subscription
-    amountNewVideos={23}
-    label="TEDx Talks"
+    label="freeCodeCamp"
   />
   <Subscription
     amountNewVideos={4}
-    label="Stanford iOS"
+    label="Udemy"
   />
   <Subscription
-    amountNewVideos={114}
-    label="Udacity"
+    amountNewVideos={23}
+    label="Frontend Masters"
+  />
+  <Subscription
+    amountNewVideos={16}
+    label="Academnd"
   />
 </Fragment>
 `;

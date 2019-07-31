@@ -116,7 +116,7 @@ export function buildVideoDetailRequest(videoId) {
   );
 }
 
-export function buildRelatedVideosRequest(videoId, amountRelatedVideos = 12) {
+export function buildRelatedVideosRequest(videoId, amountRelatedVideos = 8) {
   return buildApiRequest(
     'GET',
     '/youtube/v3/search',

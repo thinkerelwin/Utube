@@ -6,6 +6,7 @@
 
   align-items: center;
   grid-row-gap: 16px;
+  grid-column-gap: 16px;
 
   .channel-image {
     grid-row: 1 / 2;
@@ -42,7 +43,7 @@
 
     p {
       line-height: 1.8rem;
-      margin-bottom: 0;
+      margin-bottom: 8px;
     }
 
     .collapsed {

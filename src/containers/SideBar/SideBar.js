@@ -12,7 +12,7 @@ export const SideBar = () => (
     <SideBarItem path="/feed/trending" label="Trending" icon="fire" />
     <SideBarItem label="Followers" icon="spy" />
     <Divider />
-    <SideBarHeader title="Library" />
+    <SideBarItem label="Library" icon="folder" />
     <SideBarItem label="History" icon="history" />
     <SideBarItem label="Watch later" icon="clock" />
     <SideBarItem label="Liked videos" icon="thumbs up" />
