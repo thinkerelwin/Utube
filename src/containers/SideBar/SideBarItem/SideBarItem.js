@@ -6,14 +6,13 @@ import { Icon, Menu } from 'semantic-ui-react';
 
 function SideBarItem(props) {
   const highlight = shouldBeHighlighted() ? 'highlight-item' : null;
+  console.log(shouldBeHighlighted(), props.location);
 
   function shouldBeHighlighted() {
-    const { pathname, path } = props.location;
-
-    if (path === '/') {
-      return pathname === path;
+    if (props.path === '/') {
+      return props.location.pathname === props.path;
     }
-    return pathname.includes(path);
+    return props.location.pathname.includes(props.path);
   }
 
   return (
