@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/Utube/static/css/main.33262b86.chunk.css",
-    "main.js": "/Utube/static/js/main.3ffb12b4.chunk.js",
-    "main.js.map": "/Utube/static/js/main.3ffb12b4.chunk.js.map",
-    "runtime~main.js": "/Utube/static/js/runtime~main.756a2414.js",
-    "runtime~main.js.map": "/Utube/static/js/runtime~main.756a2414.js.map",
-    "static/css/2.b401d267.chunk.css": "/Utube/static/css/2.b401d267.chunk.css",
-    "static/js/2.d1a0c831.chunk.js": "/Utube/static/js/2.d1a0c831.chunk.js",
-    "static/js/2.d1a0c831.chunk.js.map": "/Utube/static/js/2.d1a0c831.chunk.js.map",
-    "index.html": "/Utube/index.html",
-    "precache-manifest.e49f35434831ccf9897b0512f4abefc8.js": "/Utube/precache-manifest.e49f35434831ccf9897b0512f4abefc8.js",
-    "service-worker.js": "/Utube/service-worker.js",
-    "static/css/2.b401d267.chunk.css.map": "/Utube/static/css/2.b401d267.chunk.css.map",
-    "static/css/main.33262b86.chunk.css.map": "/Utube/static/css/main.33262b86.chunk.css.map",
-    "static/media/semantic.min.css": "/Utube/static/media/outline-icons.ef60a4f6.woff",
-    "static/media/logo.jpg": "/Utube/static/media/logo.551cce21.jpg"
+    "main.css": "/static/css/main.33262b86.chunk.css",
+    "main.js": "/static/js/main.efc6a9ff.chunk.js",
+    "main.js.map": "/static/js/main.efc6a9ff.chunk.js.map",
+    "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
+    "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
+    "static/css/2.621b5bde.chunk.css": "/static/css/2.621b5bde.chunk.css",
+    "static/js/2.d1a0c831.chunk.js": "/static/js/2.d1a0c831.chunk.js",
+    "static/js/2.d1a0c831.chunk.js.map": "/static/js/2.d1a0c831.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.72782bc86da8ae0f42f218ea0e8e936a.js": "/precache-manifest.72782bc86da8ae0f42f218ea0e8e936a.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.621b5bde.chunk.css.map": "/static/css/2.621b5bde.chunk.css.map",
+    "static/css/main.33262b86.chunk.css.map": "/static/css/main.33262b86.chunk.css.map",
+    "static/media/semantic.min.css": "/static/media/outline-icons.ef60a4f6.woff",
+    "static/media/logo.jpg": "/static/media/logo.551cce21.jpg"
   }
 }
