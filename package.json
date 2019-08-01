@@ -39,7 +39,7 @@
       "git add"
     ]
   },
-  "homepage": "https://thinkerelwin.github.io",
+  "homepage": "http://utube-react.surge.sh/",
   "browserslist": {
     "production": [
       ">0.2%",
