@@ -53,7 +53,7 @@ const Header = props => {
           <Icon className="header-icon" name="alarm" size="large" />
         </Menu.Item>
         <Menu.Item name="avatar">
-          <Image src="http://via.placeholder.com/80x80" avatar />
+          <Image src="https://via.placeholder.com/80x80" avatar />
         </Menu.Item>
       </Menu.Menu>
     </Menu>
