@@ -39,6 +39,7 @@
       "git add"
     ]
   },
+  "homepage": "https://thinkerelwin.github.io/Utube/",
   "browserslist": {
     "production": [
       ">0.2%",
