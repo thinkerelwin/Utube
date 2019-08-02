@@ -6,4 +6,4 @@
 4. User can view video details, comments, and related videos when they click one of the thumbnail images
 5. it will loads more videos/comments when user scroll to the bottom of the current page
 
-### it utilize Youtube Data API v3, the data you see is real, not mock data.
+### It utilize Youtube Data API v3, the data you see is real, not mock data.
