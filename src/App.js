@@ -24,7 +24,7 @@ const App = props => {
     function loadYoutubeApi() {
       const script = document.createElement('script');
       script.src = 'https://apis.google.com/js/client.js';
-      const API_KEY = process.env.YOUTUBE_KEY;
+      const API_KEY = process.env.REACT_APP_YOUTUBE_KEY;
 
       script.onload = () => {
         window.gapi.load('client', () => {
