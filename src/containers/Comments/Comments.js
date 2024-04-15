@@ -9,7 +9,7 @@ export function Comments(props) {
     return <div />;
   }
 
-  const comments = props.comments.map(comment => {
+  const comments = props.comments.map((comment) => {
     return <Comment comment={comment} key={comment.id} />;
   });
 
@@ -24,5 +24,5 @@ export function Comments(props) {
 
 Comments.propTypes = {
   comments: PropTypes.array,
-  amountComments: PropTypes.number
+  amountComments: PropTypes.number,
 };

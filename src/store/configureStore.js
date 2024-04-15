@@ -9,7 +9,7 @@ export function configureStore() {
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
   const store = createStore(
     reducer,
-    composeEnhancers(applyMiddleware(sagaMiddleware))
+    composeEnhancers(applyMiddleware(sagaMiddleware)),
   );
   sagaMiddleware.run(rootSaga);
   return store;

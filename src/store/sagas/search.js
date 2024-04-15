@@ -7,7 +7,7 @@ import { fetchEntity } from './index';
 export function* watchSearchForVideos() {
   while (true) {
     const { searchQuery, amount, nextPageToken } = yield take(
-      searchActions.SEARCH_FOR_VIDEOS[REQUEST]
+      searchActions.SEARCH_FOR_VIDEOS[REQUEST],
     );
     yield fork(searchForVideos, searchQuery, nextPageToken, amount);
   }
@@ -18,7 +18,7 @@ export function* searchForVideos(searchQuery, nextPageToken, amount) {
     null,
     searchQuery,
     nextPageToken,
-    amount
+    amount,
   );
   yield fetchEntity(request, searchActions.forVideos, searchQuery);
 }

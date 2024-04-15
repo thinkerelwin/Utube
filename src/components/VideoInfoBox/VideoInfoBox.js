@@ -16,7 +16,7 @@ export function VideoInfoBox(props) {
   const descriptionParagraphs = getDescriptionParagraphs();
   const { descriptionTextClass, buttonTitle } = getConfig();
   const publishedAtString = getPublishedAtDateString(
-    props.video.snippet.publishedAt
+    props.video.snippet.publishedAt,
   );
 
   const onToggleCollapseButtonClick = () => {
@@ -42,13 +42,13 @@ export function VideoInfoBox(props) {
     let buttonTitle = collapsed ? 'Show More' : 'Show Less';
     return {
       descriptionTextClass,
-      buttonTitle
+      buttonTitle,
     };
   }
 
   function getSubscriberButtonText() {
     const parsedSubscriberCount = Number(
-      props.channel.statistics.subscriberCount
+      props.channel.statistics.subscriberCount,
     );
     const subscriberCount = getShortNumberString(parsedSubscriberCount);
     return `Subscribe ${subscriberCount}`;
@@ -81,5 +81,5 @@ export function VideoInfoBox(props) {
 
 VideoInfoBox.propTypes = {
   video: PropTypes.object,
-  channel: PropTypes.object
+  channel: PropTypes.object,
 };

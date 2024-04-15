@@ -7,7 +7,7 @@ import { getYoutubeLibraryLoaded } from '../../store/reducers/api';
 import {
   getVideoCategoryIds,
   videoCategoriesLoaded,
-  videosByCategoryLoaded
+  videosByCategoryLoaded,
 } from '../../store/reducers/videos';
 
 import './Home.scss';
@@ -18,7 +18,7 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      categoryIndex: 0
+      categoryIndex: 0,
     };
     this.bottomReachedCallback = this.bottomReachedCallback.bind(this);
   }
@@ -45,12 +45,12 @@ class Home extends React.Component {
     const categoryStartIndex = this.state.categoryIndex;
     const categories = this.props.videoCategories.slice(
       categoryStartIndex,
-      categoryStartIndex + 3
+      categoryStartIndex + 3,
     );
     this.props.fetchMostPopularVideosByCategory(categories);
-    this.setState(prevState => {
+    this.setState((prevState) => {
       return {
-        categoryIndex: prevState.categoryIndex + 3
+        categoryIndex: prevState.categoryIndex + 3,
       };
     });
   }
@@ -87,7 +87,7 @@ function mapStateToProps(state) {
     youtubeLibraryLoaded: getYoutubeLibraryLoaded(state),
     videoCategories: getVideoCategoryIds(state),
     videoCategoriesLoaded: videoCategoriesLoaded(state),
-    videosByCategoryLoaded: videosByCategoryLoaded(state)
+    videosByCategoryLoaded: videosByCategoryLoaded(state),
   };
 }
 
@@ -100,9 +100,9 @@ function mapDispatchToProps(dispatch) {
     {
       fetchMostPopularVideos,
       fetchVideoCategories,
-      fetchMostPopularVideosByCategory
+      fetchMostPopularVideosByCategory,
     },
-    dispatch
+    dispatch,
   );
 }
 
@@ -113,10 +113,7 @@ Home.propTypes = {
   videoCategories: PropTypes.array,
   fetchMostPopularVideosByCategory: PropTypes.func,
   videoCategoriesLoaded: PropTypes.bool,
-  videosByCategoryLoaded: PropTypes.number
+  videosByCategoryLoaded: PropTypes.number,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

@@ -11,7 +11,7 @@ import './WatchContent.scss';
 import {
   getRelatedVideos,
   getVideoById,
-  getAmountComments
+  getAmountComments,
 } from '../../../store/reducers/videos';
 import { getChannel } from '../../../store/reducers/channels';
 import { getCommentsForVideo } from '../../../store/reducers/comments';
@@ -55,7 +55,7 @@ function mapStateToProps(state, props) {
     relatedVideos: getRelatedVideos(state, props.videoId),
     channel: getChannel(state, props.channelId),
     comments: getCommentsForVideo(state, props.videoId),
-    amountComments: getAmountComments(state, props.videoId)
+    amountComments: getAmountComments(state, props.videoId),
   };
 }
 
@@ -67,10 +67,7 @@ WatchContent.propTypes = {
   channel: PropTypes.object,
   comments: PropTypes.array,
   amountComments: PropTypes.number,
-  relatedVideos: PropTypes.array
+  relatedVideos: PropTypes.array,
 };
 
-export default connect(
-  mapStateToProps,
-  null
-)(WatchContent);
+export default connect(mapStateToProps, null)(WatchContent);

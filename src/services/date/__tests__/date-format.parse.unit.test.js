@@ -8,7 +8,7 @@ describe('date-format ISO8601', () => {
       days: 0,
       hours: 0,
       minutes: 0,
-      seconds: 4
+      seconds: 4,
     });
   });
 
@@ -19,7 +19,7 @@ describe('date-format ISO8601', () => {
       days: 0,
       hours: 0,
       minutes: 0,
-      seconds: 13
+      seconds: 13,
     });
   });
 
@@ -30,7 +30,7 @@ describe('date-format ISO8601', () => {
       days: 0,
       hours: 0,
       minutes: 1,
-      seconds: 0
+      seconds: 0,
     });
   });
 
@@ -41,7 +41,7 @@ describe('date-format ISO8601', () => {
       days: 0,
       hours: 0,
       minutes: 1,
-      seconds: 31
+      seconds: 31,
     });
   });
 
@@ -52,7 +52,7 @@ describe('date-format ISO8601', () => {
       days: 0,
       hours: 0,
       minutes: 10,
-      seconds: 10
+      seconds: 10,
     });
   });
 
@@ -63,7 +63,7 @@ describe('date-format ISO8601', () => {
       days: 0,
       hours: 3,
       minutes: 6,
-      seconds: 15
+      seconds: 15,
     });
   });
 
@@ -74,7 +74,7 @@ describe('date-format ISO8601', () => {
       days: 0,
       hours: 13,
       minutes: 30,
-      seconds: 47
+      seconds: 47,
     });
   });
 
@@ -85,7 +85,7 @@ describe('date-format ISO8601', () => {
       days: 1,
       hours: 0,
       minutes: 25,
-      seconds: 5
+      seconds: 5,
     });
   });
 });

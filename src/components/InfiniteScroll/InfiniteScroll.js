@@ -20,5 +20,5 @@ export function InfiniteScroll(props) {
 InfiniteScroll.propTypes = {
   children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   bottomReachedCallback: PropTypes.func,
-  showLoader: PropTypes.bool
+  showLoader: PropTypes.bool,
 };

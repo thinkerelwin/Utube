@@ -25,7 +25,7 @@ export function VideoPreview(props) {
   function videoPreviewClass() {
     return classNames('video-preview', {
       horizontal: props.horizontal,
-      expanded: props.expanded
+      expanded: props.expanded,
     });
   }
 
@@ -52,7 +52,7 @@ export function VideoPreview(props) {
         <div className="video-info">
           <div
             className={classNames('semi-bold', 'show-max-two-lines', {
-              expanded: props.expanded
+              expanded: props.expanded,
             })}
           >
             {video.snippet.title}
@@ -75,5 +75,5 @@ VideoPreview.propTypes = {
   horizontal: PropTypes.bool,
   expanded: PropTypes.bool,
   pathname: PropTypes.string,
-  search: PropTypes.string
+  search: PropTypes.string,
 };

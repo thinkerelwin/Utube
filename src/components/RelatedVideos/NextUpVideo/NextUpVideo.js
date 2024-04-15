@@ -26,5 +26,5 @@ export function NextUpVideo(props) {
 }
 
 NextUpVideo.propTypes = {
-  video: PropTypes.object
+  video: PropTypes.object,
 };

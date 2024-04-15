@@ -10,5 +10,5 @@ export default combineReducers({
   videos: videosReducer,
   channels: channelsReducer,
   comments: commentsReducer,
-  search: searchReducer
+  search: searchReducer,
 });

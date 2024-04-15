@@ -7,7 +7,7 @@ import { withRouter } from 'react-router-dom';
 import { getYoutubeLibraryLoaded } from '../../store/reducers/api';
 import {
   getSearchNextPageToken,
-  getSearchResults
+  getSearchResults,
 } from '../../store/reducers/search';
 import * as searchActions from '../../store/actions/search';
 import { getSearchParam } from '../../services/url';
@@ -47,7 +47,7 @@ class Search extends React.Component {
       this.props.searchForVideos(
         this.getSearchQuery(),
         this.props.nextPageToken,
-        25
+        25,
       );
     }
   }
@@ -67,7 +67,7 @@ function mapStateToProps(state, props) {
   return {
     youtubeApiLoaded: getYoutubeLibraryLoaded(state),
     searchResults: getSearchResults(state, props.location.search),
-    nextPageToken: getSearchNextPageToken(state, props.location.search)
+    nextPageToken: getSearchNextPageToken(state, props.location.search),
   };
 }
 
@@ -82,12 +82,7 @@ Search.propTypes = {
   history: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   location: PropTypes.object,
   nextPageToken: PropTypes.string,
-  searchResults: PropTypes.array
+  searchResults: PropTypes.array,
 };
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Search)
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Search));

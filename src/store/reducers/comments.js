@@ -7,9 +7,9 @@ import { getSearchParam } from '../../services/url/index.js';
 
 const initialState = {
   byVideo: {},
-  byId: {}
+  byId: {},
 };
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case WATCH_DETAILS[SUCCESS]:
       return reduceWatchDetails(action.response, action.videoId, state);
@@ -22,7 +22,7 @@ export default function(state = initialState, action) {
 
 function reduceWatchDetails(responses, videoId, prevState) {
   const commentThreadResponse = responses.find(
-    res => res.result.kind === COMMENT_THREAD_LIST_RESPONSE
+    (res) => res.result.kind === COMMENT_THREAD_LIST_RESPONSE,
   );
   return reduceCommentThread(commentThreadResponse.result, videoId, prevState);
 }
@@ -45,19 +45,19 @@ function reduceCommentThread(response, videoId, prevState) {
 
   const byVideoComment = {
     nextPageToken: response.nextPageToken,
-    ids: commentIds
+    ids: commentIds,
   };
 
   return {
     ...prevState,
     byId: {
       ...prevState.byId,
-      ...newComments
+      ...newComments,
     },
     byVideo: {
       ...prevState.byVideo,
-      [videoId]: byVideoComment
-    }
+      [videoId]: byVideoComment,
+    },
   };
 }
 
@@ -70,19 +70,16 @@ const getCommentIdsForVideo = (state, videoId) => {
 };
 export const getCommentsForVideo = createSelector(
   getCommentIdsForVideo,
-  state => state.comments.byId,
+  (state) => state.comments.byId,
   (commentIds, allComments) => {
-    return commentIds.map(commentId => allComments[commentId]);
-  }
+    return commentIds.map((commentId) => allComments[commentId]);
+  },
 );
 
 const getComment = (state, location) => {
   const videoId = getSearchParam(location, 'v');
   return state.comments.byVideo[videoId];
 };
-export const getCommentNextPageToken = createSelector(
-  getComment,
-  comment => {
-    return comment ? comment.nextPageToken : null;
-  }
-);
+export const getCommentNextPageToken = createSelector(getComment, (comment) => {
+  return comment ? comment.nextPageToken : null;
+});

@@ -43,7 +43,7 @@ class Watch extends React.Component {
     if (this.props.nextPageToken) {
       this.props.fetchCommentThread(
         this.getVideoId(),
-        this.props.nextPageToken
+        this.props.nextPageToken,
       );
     }
   }
@@ -65,7 +65,7 @@ function mapStateToProps(state, props) {
   return {
     youtubeLibraryLoaded: getYoutubeLibraryLoaded(state),
     channelId: getChannelId(state, props.location, 'v'),
-    nextPageToken: getCommentNextPageToken(state, props.location)
+    nextPageToken: getCommentNextPageToken(state, props.location),
   };
 }
 
@@ -74,7 +74,7 @@ function mapDispatchToProps(dispatch) {
   const fetchCommentThread = commentActions.thread.request;
   return bindActionCreators(
     { fetchWatchDetails, fetchCommentThread },
-    dispatch
+    dispatch,
   );
 }
 
@@ -85,12 +85,7 @@ Watch.propTypes = {
   fetchWatchDetails: PropTypes.func,
   channelId: PropTypes.string,
   nextPageToken: PropTypes.string,
-  fetchCommentThread: PropTypes.func
+  fetchCommentThread: PropTypes.func,
 };
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Watch)
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Watch));

@@ -29,5 +29,5 @@ export function Subscription(props) {
 Subscription.propTypes = {
   broadcasting: PropTypes.bool,
   amountNewVideos: PropTypes.number,
-  label: PropTypes.string
+  label: PropTypes.string,
 };

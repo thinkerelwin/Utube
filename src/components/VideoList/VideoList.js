@@ -17,7 +17,7 @@ export function VideoList(props) {
       return null;
     }
 
-    return props.videos.map(video => (
+    return props.videos.map((video) => (
       <VideoPreview
         horizontal={true}
         expanded={true}
@@ -47,5 +47,5 @@ export function VideoList(props) {
 VideoList.propTypes = {
   videos: PropTypes.array,
   bottomReachedCallback: PropTypes.func,
-  showLoader: PropTypes.bool
+  showLoader: PropTypes.bool,
 };

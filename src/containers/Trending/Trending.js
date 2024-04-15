@@ -8,7 +8,7 @@ import * as videoActions from '../../store/actions/video';
 import {
   getMostPopularVideos,
   getMostPopularVideosNextPageToken,
-  allMostPopularVideosLoaded
+  allMostPopularVideosLoaded,
 } from '../../store/reducers/videos';
 import { getYoutubeLibraryLoaded } from '../../store/reducers/api';
 
@@ -57,7 +57,7 @@ function mapStateToProps(state) {
     videos: getMostPopularVideos(state),
     youtubeLibraryLoaded: getYoutubeLibraryLoaded(state),
     allMostPopularVideosLoaded: allMostPopularVideosLoaded(state),
-    nextPageToken: getMostPopularVideosNextPageToken(state)
+    nextPageToken: getMostPopularVideosNextPageToken(state),
   };
 }
 
@@ -71,10 +71,7 @@ Trending.propTypes = {
   fetchMostPopularVideos: PropTypes.func,
   allMostPopularVideosLoaded: PropTypes.bool,
   nextPageToken: PropTypes.string,
-  videos: PropTypes.array
+  videos: PropTypes.array,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Trending);
+export default connect(mapStateToProps, mapDispatchToProps)(Trending);

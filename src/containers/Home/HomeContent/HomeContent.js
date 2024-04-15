@@ -5,7 +5,7 @@ import { InfiniteScroll } from '../../../components/InfiniteScroll/InfiniteScrol
 import './HomeContent.scss';
 import {
   getMostPopularVideos,
-  getVideosByCategory
+  getVideosByCategory,
 } from '../../../store/reducers/videos';
 import { connect } from 'react-redux';
 
@@ -54,7 +54,7 @@ function HomeContent(props) {
 function mapStateToProps(state) {
   return {
     videosByCategory: getVideosByCategory(state),
-    mostPopularVideos: getMostPopularVideos(state)
+    mostPopularVideos: getMostPopularVideos(state),
   };
 }
 
@@ -62,10 +62,7 @@ HomeContent.propTypes = {
   bottomReachedCallback: PropTypes.func,
   showLoader: PropTypes.bool,
   mostPopularVideos: PropTypes.array,
-  videosByCategory: PropTypes.object
+  videosByCategory: PropTypes.object,
 };
 
-export default connect(
-  mapStateToProps,
-  null
-)(HomeContent);
+export default connect(mapStateToProps, null)(HomeContent);

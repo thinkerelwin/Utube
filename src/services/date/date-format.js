@@ -22,9 +22,8 @@ export function getVideoDurationString(iso8601DateString) {
 
   // new Date(Date.parse(...)) doesn't work here
   // therefore we are using our regex approach
-  let { days, hours, minutes, seconds } = parseISO8601TimePattern(
-    iso8601DateString
-  );
+  let { days, hours, minutes, seconds } =
+    parseISO8601TimePattern(iso8601DateString);
 
   let secondsString = seconds.toString();
   let minutesString = minutes.toString();

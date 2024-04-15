@@ -9,7 +9,7 @@ export function VideoGrid(props) {
   if (!props.videos || !props.videos.length) {
     return <div />;
   }
-  const gridItems = props.videos.map(video => {
+  const gridItems = props.videos.map((video) => {
     return (
       <VideoPreview
         video={video}
@@ -33,5 +33,5 @@ export function VideoGrid(props) {
 VideoGrid.propTypes = {
   videos: PropTypes.array,
   hideDivider: PropTypes.bool,
-  title: PropTypes.string
+  title: PropTypes.string,
 };

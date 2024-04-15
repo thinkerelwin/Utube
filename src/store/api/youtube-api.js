@@ -11,20 +11,20 @@ export function buildApiRequest(requestMethod, path, params, properties) {
       body: resource,
       method: requestMethod,
       path: path,
-      params: params
+      params: params,
     });
   } else {
     request = window.gapi.client.request({
       method: requestMethod,
       path: path,
-      params: params
+      params: params,
     });
   }
   return request;
 }
 
 function removeEmptyParams(params) {
-  for (var p in params) {
+  for (const p in params) {
     if (!params[p] || params[p] === 'undefined') {
       delete params[p];
     }
@@ -33,25 +33,26 @@ function removeEmptyParams(params) {
 }
 
 function createResource(properties) {
-  var resource = {};
-  var normalizedProps = properties;
-  for (var p in properties) {
-    var value = properties[p];
+  const resource = {};
+  const normalizedProps = properties;
+  for (const p in properties) {
+    const value = properties[p];
     if (p && p.substr(-2, 2) === '[]') {
-      var adjustedName = p.replace('[]', '');
+      const adjustedName = p.replace('[]', '');
       if (value) {
         normalizedProps[adjustedName] = value.split(',');
       }
       delete normalizedProps[p];
     }
   }
-  for (var prop in normalizedProps) {
+  for (const prop in normalizedProps) {
     // Leave properties that don't have values out of inserted resource.
+    // eslint-disable-next-line no-prototype-builtins
     if (normalizedProps.hasOwnProperty(prop) && normalizedProps[prop]) {
-      var propArray = prop.split('.');
-      var ref = resource;
-      for (var pa = 0; pa < propArray.length; pa++) {
-        var key = propArray[pa];
+      const propArray = prop.split('.');
+      let ref = resource;
+      for (let pa = 0; pa < propArray.length; pa++) {
+        const key = propArray[pa];
         if (pa === propArray.length - 1) {
           ref[key] = normalizedProps[prop];
         } else {
@@ -67,7 +68,7 @@ export function buildMostPopularVideosRequest(
   amount = 12,
   loadDescription = false,
   nextPageToken,
-  videoCategoryId = null
+  videoCategoryId = null,
 ) {
   let fields =
     'nextPageToken,prevPageToken,items(contentDetails/duration,id,snippet(channelId,channelTitle,publishedAt,thumbnails/medium,title),statistics/viewCount),pageInfo(totalResults)';
@@ -84,9 +85,9 @@ export function buildMostPopularVideosRequest(
       regionCode: 'US',
       pageToken: nextPageToken,
       fields,
-      videoCategoryId
+      videoCategoryId,
     },
-    null
+    null,
   );
 }
 
@@ -96,9 +97,9 @@ export function buildVideoCategoriesRequest() {
     '/youtube/v3/videoCategories',
     {
       part: 'snippet',
-      regionCode: 'US'
+      regionCode: 'US',
     },
-    null
+    null,
   );
 }
 
@@ -110,9 +111,9 @@ export function buildVideoDetailRequest(videoId) {
       part: 'snippet,statistics,contentDetails',
       id: videoId,
       fields:
-        'kind,items(contentDetails/duration,id,snippet(channelId,channelTitle,description,publishedAt,thumbnails/medium,title),statistics)'
+        'kind,items(contentDetails/duration,id,snippet(channelId,channelTitle,description,publishedAt,thumbnails/medium,title),statistics)',
     },
-    null
+    null,
   );
 }
 
@@ -124,9 +125,9 @@ export function buildRelatedVideosRequest(videoId, amountRelatedVideos = 8) {
       part: 'snippet',
       type: 'video',
       maxResults: amountRelatedVideos,
-      relatedToVideoId: videoId
+      relatedToVideoId: videoId,
     },
-    null
+    null,
   );
 }
 
@@ -138,9 +139,9 @@ export function buildChannelRequest(channelId) {
       part: 'snippet,statistics',
       id: channelId,
       fields:
-        'kind,items(id,snippet(description,thumbnails/medium,title),statistics/subscriberCount)'
+        'kind,items(id,snippet(description,thumbnails/medium,title),statistics/subscriberCount)',
     },
-    null
+    null,
   );
 }
 
@@ -151,9 +152,9 @@ export function buildCommentThreadRequest(videoId, nextPageToken) {
     {
       part: 'id,snippet',
       pageToken: nextPageToken,
-      videoId
+      videoId,
     },
-    null
+    null,
   );
 }
 
@@ -166,8 +167,8 @@ export function buildSearchRequest(query, nextPageToken, amount = 12) {
       q: query,
       type: 'video',
       pageToken: nextPageToken,
-      maxResults: amount
+      maxResults: amount,
     },
-    null
+    null,
   );
 }

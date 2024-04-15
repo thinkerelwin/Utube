@@ -15,7 +15,7 @@ import 'semantic-ui-css/semantic.min.css';
 import Trending from './containers/Trending/Trending';
 import Search from './containers/Search/Search';
 
-const App = props => {
+const App = (props) => {
   const { youtubeLibraryLoaded } = props;
 
   useEffect(() => {
@@ -61,16 +61,11 @@ const App = props => {
 
 App.propTypes = {
   youtubeLibraryLoaded: PropTypes.func,
-  location: PropTypes.object
+  location: PropTypes.object,
 };
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ youtubeLibraryLoaded }, dispatch);
 }
 
-export default withRouter(
-  connect(
-    null,
-    mapDispatchToProps
-  )(App)
-);
+export default withRouter(connect(null, mapDispatchToProps)(App));

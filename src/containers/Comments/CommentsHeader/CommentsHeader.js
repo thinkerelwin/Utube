@@ -15,5 +15,5 @@ export function CommentsHeader(props) {
   );
 }
 CommentsHeader.propTypes = {
-  amountComments: PropTypes.number
+  amountComments: PropTypes.number,
 };

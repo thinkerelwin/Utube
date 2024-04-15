@@ -38,5 +38,5 @@ export function Rating(props) {
 Rating.propTypes = {
   likeCount: PropTypes.number,
   dislikeCount: PropTypes.number,
-  children: PropTypes.array
+  children: PropTypes.array,
 };

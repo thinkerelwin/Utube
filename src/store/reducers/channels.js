@@ -3,10 +3,10 @@ import { SUCCESS } from '../actions';
 import { CHANNEL_LIST_RESPONSE } from '../api/youtube-api-response-types';
 
 const initialState = {
-  byId: {}
+  byId: {},
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case WATCH_DETAILS[SUCCESS]:
       return reduceWatchDetails(action.response, state);
@@ -19,7 +19,7 @@ export default function(state = initialState, action) {
 
 function reduceWatchDetails(responses, prevState) {
   const channelResponse = responses.find(
-    response => response.result.kind === CHANNEL_LIST_RESPONSE
+    (response) => response.result.kind === CHANNEL_LIST_RESPONSE,
   );
   let channels = {};
   if (channelResponse && channelResponse.result.items) {
@@ -32,14 +32,14 @@ function reduceWatchDetails(responses, prevState) {
     ...prevState,
     byId: {
       ...prevState.byId,
-      ...channels
-    }
+      ...channels,
+    },
   };
 }
 
 function reduceVideoDetails(responses, prevState) {
   const channelResponse = responses.find(
-    response => response.result.kind === CHANNEL_LIST_RESPONSE
+    (response) => response.result.kind === CHANNEL_LIST_RESPONSE,
   );
   let channelEntry = {};
   if (channelResponse && channelResponse.result.items) {
@@ -48,7 +48,7 @@ function reduceVideoDetails(responses, prevState) {
     // or at most one item (i.e. the channel we've been asking for)
     const channel = channelResponse.result.items[0];
     channelEntry = {
-      [channel.id]: channel
+      [channel.id]: channel,
     };
   }
 
@@ -56,8 +56,8 @@ function reduceVideoDetails(responses, prevState) {
     ...prevState,
     byId: {
       ...prevState.byId,
-      ...channelEntry
-    }
+      ...channelEntry,
+    },
   };
 }
 

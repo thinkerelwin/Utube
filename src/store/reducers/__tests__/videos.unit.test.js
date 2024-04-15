@@ -9,7 +9,7 @@ describe('videos reducer', () => {
     const expectedEndState = { ...initialState };
 
     expect(videosReducer(undefined, { type: 'some-unused-type' })).toEqual(
-      expectedEndState
+      expectedEndState,
     );
   });
 
@@ -17,11 +17,11 @@ describe('videos reducer', () => {
     const startState = { ...initialState };
     const action = {
       type: MOST_POPULAR[SUCCESS],
-      response: mostPopularResponse
+      response: mostPopularResponse,
     };
     const expectedEndState = {
       ...startState,
-      ...mostPopularSuccessState
+      ...mostPopularSuccessState,
     };
     expect(videosReducer(startState, action)).toEqual(expectedEndState);
   });

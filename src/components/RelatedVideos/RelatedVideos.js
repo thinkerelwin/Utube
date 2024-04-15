@@ -13,7 +13,7 @@ export function RelatedVideos(props) {
   const nextUpVideo = props.videos[0];
   const remainingVideos = props.videos.slice(1);
 
-  const relatedVideosPreviews = remainingVideos.map(relatedVideo => (
+  const relatedVideosPreviews = remainingVideos.map((relatedVideo) => (
     <VideoPreview
       video={relatedVideo}
       key={relatedVideo.id}
@@ -32,5 +32,5 @@ export function RelatedVideos(props) {
 }
 
 RelatedVideos.propTypes = {
-  videos: PropTypes.array
+  videos: PropTypes.array,
 };

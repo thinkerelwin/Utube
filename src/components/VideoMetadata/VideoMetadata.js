@@ -38,5 +38,5 @@ export function VideoMetadata(props) {
 }
 
 VideoMetadata.propTypes = {
-  video: PropTypes.object
+  video: PropTypes.object,
 };

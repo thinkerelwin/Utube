@@ -9,11 +9,8 @@ export function Comment(props) {
     return <div />;
   }
   const topLevelComment = props.comment.snippet.topLevelComment;
-  const {
-    authorProfileImageUrl,
-    authorDisplayName,
-    textOriginal
-  } = topLevelComment.snippet;
+  const { authorProfileImageUrl, authorDisplayName, textOriginal } =
+    topLevelComment.snippet;
   const likeCount = topLevelComment.snippet.likeCount;
 
   return (
@@ -36,5 +33,5 @@ export function Comment(props) {
 }
 
 Comment.propTypes = {
-  comment: PropTypes.object
+  comment: PropTypes.object,
 };

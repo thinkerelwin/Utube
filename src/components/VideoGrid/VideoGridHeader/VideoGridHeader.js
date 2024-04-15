@@ -11,5 +11,5 @@ export function VideoGridHeader(props) {
 }
 
 VideoGridHeader.propTypes = {
-  title: PropTypes.string
+  title: PropTypes.string,
 };

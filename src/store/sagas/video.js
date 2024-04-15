@@ -7,7 +7,7 @@ import { fetchEntity, ignoreErrors } from './index';
 export function* watchMostPopularVideos() {
   while (true) {
     const { amount, loadDescription, nextPageToken } = yield take(
-      videoActions.MOST_POPULAR[REQUEST]
+      videoActions.MOST_POPULAR[REQUEST],
     );
     yield fork(fetchMostPopularVideos, amount, loadDescription, nextPageToken);
   }
@@ -16,13 +16,13 @@ export function* watchMostPopularVideos() {
 export function* fetchMostPopularVideos(
   amount,
   loadDescription,
-  nextPageToken
+  nextPageToken,
 ) {
   const request = api.buildMostPopularVideosRequest.bind(
     null,
     amount,
     loadDescription,
-    nextPageToken
+    nextPageToken,
   );
   yield fetchEntity(request, videoActions.mostPopular);
 }
@@ -30,7 +30,7 @@ export function* fetchMostPopularVideos(
 export const fetchVideoCategories = fetchEntity.bind(
   null,
   api.buildVideoCategoriesRequest,
-  videoActions.categories
+  videoActions.categories,
 );
 
 export function* watchVideoCategories() {
@@ -40,20 +40,20 @@ export function* watchVideoCategories() {
 export function* watchMostPopularVideosByCategory() {
   while (true) {
     const { categories } = yield take(
-      videoActions.MOST_POPULAR_BY_CATEGORY[REQUEST]
+      videoActions.MOST_POPULAR_BY_CATEGORY[REQUEST],
     );
     yield fork(fetchMostPopularVideosByCategory, categories);
   }
 }
 
 export function* fetchMostPopularVideosByCategory(categories) {
-  const requests = categories.map(category => {
+  const requests = categories.map((category) => {
     const wrapper = ignoreErrors(
       api.buildMostPopularVideosRequest,
       12,
       false,
       null,
-      category
+      category,
     );
     return call(wrapper);
   });

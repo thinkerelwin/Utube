@@ -5,10 +5,10 @@ import logo from '../../assets/img/logo.jpg';
 import { Link, withRouter } from 'react-router-dom';
 import { Image, Menu, Form, Input, Icon } from 'semantic-ui-react';
 
-const Header = props => {
+const Header = (props) => {
   const [queryString, setQueryString] = useState('');
 
-  const onInputChange = event => {
+  const onInputChange = (event) => {
     setQueryString(event.target.value);
   };
 
@@ -61,7 +61,7 @@ const Header = props => {
 };
 
 Header.propTypes = {
-  history: PropTypes.oneOfType([PropTypes.object, PropTypes.func])
+  history: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
 };
 
 export default withRouter(Header);

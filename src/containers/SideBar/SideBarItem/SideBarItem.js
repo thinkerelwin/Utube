@@ -32,7 +32,7 @@ SideBarItem.propTypes = {
   location: PropTypes.object,
   path: PropTypes.string,
   icon: PropTypes.string,
-  label: PropTypes.string
+  label: PropTypes.string,
 };
 
 export default withRouter(SideBarItem);

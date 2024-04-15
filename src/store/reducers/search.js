@@ -1,7 +1,7 @@
 import { SEARCH_FOR_VIDEOS } from '../actions/search';
 import { REQUEST, SUCCESS } from '../actions';
 
-export default function(state = {}, action) {
+export default function (state = {}, action) {
   switch (action.type) {
     case SEARCH_FOR_VIDEOS[SUCCESS]:
       return reduceSearchForVideos(action.response, action.searchQuery, state);
@@ -13,13 +13,13 @@ export default function(state = {}, action) {
   }
 }
 
-export const getSearchResults = state => state.search.results;
-export const getSearchNextPageToken = state => state.search.nextPageToken;
+export const getSearchResults = (state) => state.search.results;
+export const getSearchNextPageToken = (state) => state.search.nextPageToken;
 
 function reduceSearchForVideos(response, searchQuery, prevState) {
-  let searchResults = response.items.map(item => ({
+  let searchResults = response.items.map((item) => ({
     ...item,
-    id: item.id.videoId
+    id: item.id.videoId,
   }));
 
   if (prevState.query === searchQuery) {
@@ -31,6 +31,6 @@ function reduceSearchForVideos(response, searchQuery, prevState) {
     totalResults: response.pageInfo.totalResults,
     nextPageToken: response.nextPageToken,
     query: searchQuery,
-    results: searchResults
+    results: searchResults,
   };
 }

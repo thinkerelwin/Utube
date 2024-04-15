@@ -26,5 +26,5 @@ export function Video(props) {
 }
 
 Video.propTypes = {
-  id: PropTypes.string
+  id: PropTypes.string,
 };

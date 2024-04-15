@@ -16,5 +16,5 @@ export function Layout(props) {
 }
 
 Layout.propTypes = {
-  children: PropTypes.object
+  children: PropTypes.object,
 };

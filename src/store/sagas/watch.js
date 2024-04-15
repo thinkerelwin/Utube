@@ -5,17 +5,17 @@ import {
   buildVideoDetailRequest,
   buildRelatedVideosRequest,
   buildChannelRequest,
-  buildCommentThreadRequest
+  buildCommentThreadRequest,
 } from '../api/youtube-api';
 import {
   SEARCH_LIST_RESPONSE,
-  VIDEO_LIST_RESPONSE
+  VIDEO_LIST_RESPONSE,
 } from '../api/youtube-api-response-types';
 
 export function* watchWatchDetails() {
   while (true) {
     const { videoId, channelId } = yield take(
-      watchActions.WATCH_DETAILS[REQUEST]
+      watchActions.WATCH_DETAILS[REQUEST],
     );
 
     yield fork(fetchWatchDetails, videoId, channelId);
@@ -26,7 +26,7 @@ export function* fetchWatchDetails(videoId, channelId) {
   let requests = [
     buildVideoDetailRequest.bind(null, videoId),
     buildRelatedVideosRequest.bind(null, videoId),
-    buildCommentThreadRequest.bind(null, videoId)
+    buildCommentThreadRequest.bind(null, videoId),
   ];
 
   if (channelId) {
@@ -34,7 +34,7 @@ export function* fetchWatchDetails(videoId, channelId) {
   }
 
   try {
-    const responses = yield all(requests.map(fn => call(fn)));
+    const responses = yield all(requests.map((fn) => call(fn)));
     yield put(watchActions.details.success(responses, videoId));
     yield call(fetchVideoDetails, responses, channelId === null);
   } catch (error) {
@@ -44,13 +44,13 @@ export function* fetchWatchDetails(videoId, channelId) {
 
 function* fetchVideoDetails(responses, shouldFetchChannelInfo) {
   const searchListResponse = responses.find(
-    response => response.result.kind === SEARCH_LIST_RESPONSE
+    (response) => response.result.kind === SEARCH_LIST_RESPONSE,
   );
   const relatedVideoIds = searchListResponse.result.items.map(
-    relatedVideo => relatedVideo.id.videoId
+    (relatedVideo) => relatedVideo.id.videoId,
   );
 
-  const requests = relatedVideoIds.map(relatedVideoId => {
+  const requests = relatedVideoIds.map((relatedVideoId) => {
     return buildVideoDetailRequest.bind(null, relatedVideoId);
   });
 
@@ -60,18 +60,18 @@ function* fetchVideoDetails(responses, shouldFetchChannelInfo) {
     // this is only needed, when a user directly accesses .../watch?v=1234
     // because then we only know the video id
     const videoDetailResponse = responses.find(
-      response => response.result.kind === VIDEO_LIST_RESPONSE
+      (response) => response.result.kind === VIDEO_LIST_RESPONSE,
     );
     const videos = videoDetailResponse.result.items;
     if (videos && videos.length) {
       requests.push(
-        buildChannelRequest.bind(null, videos[0].snippet.channelId)
+        buildChannelRequest.bind(null, videos[0].snippet.channelId),
       );
     }
   }
 
   try {
-    const responses = yield all(requests.map(fn => call(fn)));
+    const responses = yield all(requests.map((fn) => call(fn)));
     yield put(watchActions.videoDetails.success(responses));
   } catch (error) {
     yield put(watchActions.videoDetails.failure(error));

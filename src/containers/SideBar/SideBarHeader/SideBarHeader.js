@@ -13,5 +13,5 @@ export function SideBarHeader(props) {
 }
 
 SideBarHeader.propTypes = {
-  title: PropTypes.string
+  title: PropTypes.string,
 };
