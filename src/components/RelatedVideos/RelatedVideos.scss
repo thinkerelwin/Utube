@@ -1,4 +1,8 @@
 .related-videos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   a > div {
     margin-top: 8px;
   }

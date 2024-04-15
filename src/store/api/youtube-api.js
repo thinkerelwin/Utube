@@ -117,20 +117,6 @@ export function buildVideoDetailRequest(videoId) {
   );
 }
 
-export function buildRelatedVideosRequest(videoId, amountRelatedVideos = 8) {
-  return buildApiRequest(
-    'GET',
-    '/youtube/v3/search',
-    {
-      part: 'snippet',
-      type: 'video',
-      maxResults: amountRelatedVideos,
-      relatedToVideoId: videoId,
-    },
-    null,
-  );
-}
-
 export function buildChannelRequest(channelId) {
   return buildApiRequest(
     'GET',

@@ -6,10 +6,7 @@ import {
 } from '../actions/video';
 import { VIDEO_DETAILS, WATCH_DETAILS } from '../actions/watch';
 import { SUCCESS } from '../actions';
-import {
-  VIDEO_LIST_RESPONSE,
-  SEARCH_LIST_RESPONSE,
-} from '../api/youtube-api-response-types';
+import { VIDEO_LIST_RESPONSE } from '../api/youtube-api-response-types';
 import { getSearchParam } from '../../services/url/index';
 
 export const initialState = {
@@ -181,7 +178,6 @@ function reduceWatchDetails(responses, prevState) {
   // we know that items will only have one element
   // because we explicitly asked for a video with a specific id
   const video = videoDetailResponse.result.items[0];
-  const relatedEntry = reduceRelatedVideosRequest(responses);
 
   return {
     ...prevState,
@@ -189,30 +185,12 @@ function reduceWatchDetails(responses, prevState) {
       ...prevState.byId,
       [video.id]: video,
     },
-    related: {
-      ...prevState.related,
-      [video.id]: relatedEntry,
-    },
   };
 }
 
 export const getVideoById = (state, videoId) => {
   return state.videos.byId[videoId];
 };
-
-function reduceRelatedVideosRequest(responses) {
-  const relatedVideosResponse = responses.find(
-    (r) => r.result.kind === SEARCH_LIST_RESPONSE,
-  );
-  const { pageInfo, items, nextPageToken } = relatedVideosResponse.result;
-  const relatedVideoIds = items.map((video) => video.id.videoId);
-
-  return {
-    totalResults: pageInfo.totalResults,
-    nextPageToken,
-    items: relatedVideoIds,
-  };
-}
 
 function reduceVideoDetails(responses, prevState) {
   const videoResponses = responses.filter(

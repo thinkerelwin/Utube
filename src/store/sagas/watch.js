@@ -3,14 +3,10 @@ import * as watchActions from '../actions/watch';
 import { REQUEST } from '../actions';
 import {
   buildVideoDetailRequest,
-  buildRelatedVideosRequest,
   buildChannelRequest,
   buildCommentThreadRequest,
 } from '../api/youtube-api';
-import {
-  SEARCH_LIST_RESPONSE,
-  VIDEO_LIST_RESPONSE,
-} from '../api/youtube-api-response-types';
+import { VIDEO_LIST_RESPONSE } from '../api/youtube-api-response-types';
 
 export function* watchWatchDetails() {
   while (true) {
@@ -25,7 +21,6 @@ export function* watchWatchDetails() {
 export function* fetchWatchDetails(videoId, channelId) {
   let requests = [
     buildVideoDetailRequest.bind(null, videoId),
-    buildRelatedVideosRequest.bind(null, videoId),
     buildCommentThreadRequest.bind(null, videoId),
   ];
 
@@ -43,16 +38,7 @@ export function* fetchWatchDetails(videoId, channelId) {
 }
 
 function* fetchVideoDetails(responses, shouldFetchChannelInfo) {
-  const searchListResponse = responses.find(
-    (response) => response.result.kind === SEARCH_LIST_RESPONSE,
-  );
-  const relatedVideoIds = searchListResponse.result.items.map(
-    (relatedVideo) => relatedVideo.id.videoId,
-  );
-
-  const requests = relatedVideoIds.map((relatedVideoId) => {
-    return buildVideoDetailRequest.bind(null, relatedVideoId);
-  });
+  let requests = [];
 
   if (shouldFetchChannelInfo) {
     // we have to extract the video's channel id from the video details response
