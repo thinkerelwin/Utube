@@ -10,3 +10,7 @@
 5. it will load more videos/comments when the user scrolls to the bottom of the current page
 
 ### It utilizes Youtube Data API v3, the data you see is real, not mock data.
+
+## Room for improvement
+
+- Add a backend server to protect the YouTube API key
