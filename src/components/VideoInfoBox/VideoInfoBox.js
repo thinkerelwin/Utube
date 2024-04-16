@@ -69,7 +69,11 @@ export function VideoInfoBox(props) {
         <Button color="youtube">{buttonText}</Button>
         <div className="video-description">
           <div className={descriptionTextClass}>{descriptionParagraphs}</div>
-          <Button compact onClick={onToggleCollapseButtonClick}>
+          <Button
+            className="description-toggle"
+            compact
+            onClick={onToggleCollapseButtonClick}
+          >
             {buttonTitle}
           </Button>
         </div>

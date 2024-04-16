@@ -9,7 +9,7 @@ Array [
   >
     <img
       className="ui circular image channel-image"
-      src="http://via.placeholder.com/48x48"
+      src="https://yt3.ggpht.com/lkH37D712tiyphnu0Id0D5MwwQ7IRuwgQLVD05iMXlDWO-kDHut3uI4MgIEAQ9StK0qOST7fiA=s240-c-k-c0x00ffffff-no-rj"
     />
     <div
       className="video-info"
@@ -17,19 +17,19 @@ Array [
       <div
         className="channel-name"
       >
-        Channel Name
+        Marques Brownlee
       </div>
       <div
         className="video-publication-date"
       >
-        Thu 24, 2017
+        Mon Apr 15 2024
       </div>
     </div>
     <button
       className="ui youtube button"
       onClick={[Function]}
     >
-      91.5K Subscribe
+      Subscribe 19M
     </button>
     <div
       className="video-description"
@@ -37,25 +37,154 @@ Array [
       <div
         className="expanded"
       >
-         
-        <p>
-          Paragraph 1
+        <p
+          key="0"
+        >
+          The Humane AI pin is... bad. Almost no one should buy it. Yet.
         </p>
-        <p>
-          Paragraph 2
+        <p
+          key="1"
+        />
+        <p
+          key="2"
+        >
+          Array [
+            "MKBHD Merch: ",
+            <a
+              href="http://shop.MKBHD.com"
+              key="0"
+            >
+              http://shop.MKBHD.com
+            </a>,
+          ]
         </p>
-        <p>
-          Paragraph 3
+        <p
+          key="3"
+        />
+        <p
+          key="4"
+        >
+          Array [
+            "Tech I'm using right now: ",
+            <a
+              href="https://www.amazon.com/shop/MKBHD"
+              key="0"
+            >
+              https://www.amazon.com/shop/MKBHD
+            </a>,
+          ]
         </p>
-        <p>
-          Paragraph 4
+        <p
+          key="5"
+        />
+        <p
+          key="6"
+        >
+          Array [
+            "Intro music: ",
+            <a
+              href="http://youtube.com/20syl"
+              key="0"
+            >
+              http://youtube.com/20syl
+            </a>,
+          ]
         </p>
-        <p>
-          Paragraph 5
+        <p
+          key="7"
+        >
+          Array [
+            "Playlist of MKBHD Intro music: ",
+            <a
+              href="https://goo.gl/B3AWV5"
+              key="0"
+            >
+              https://goo.gl/B3AWV5
+            </a>,
+          ]
+        </p>
+        <p
+          key="8"
+        />
+        <p
+          key="9"
+        >
+          Pin provided by pin for review.
+        </p>
+        <p
+          key="10"
+        />
+        <p
+          key="11"
+        >
+          ~
+        </p>
+        <p
+          key="12"
+        >
+          <a
+            href="http://twitter.com/MKBHD"
+            key="0"
+          >
+            http://twitter.com/MKBHD
+          </a>
+        </p>
+        <p
+          key="13"
+        >
+          <a
+            href="http://instagram.com/MKBHD"
+            key="0"
+          >
+            http://instagram.com/MKBHD
+          </a>
+        </p>
+        <p
+          key="14"
+        >
+          <a
+            href="http://facebook.com/MKBHD"
+            key="0"
+          >
+            http://facebook.com/MKBHD
+          </a>
+        </p>
+        <p
+          key="15"
+        />
+        <p
+          key="16"
+        >
+          0:00 What Is it?
+        </p>
+        <p
+          key="17"
+        >
+          2:30 The Hardware
+        </p>
+        <p
+          key="18"
+        >
+          4:26 What Does It Do?
+        </p>
+        <p
+          key="19"
+        >
+          8:14 The Review (It's Bad)
+        </p>
+        <p
+          key="20"
+        >
+          15:00 Smartphones are OP
+        </p>
+        <p
+          key="21"
+        >
+          21:20 A Victim of Its Future Ambition
         </p>
       </div>
       <button
-        className="ui compact button content-toggle"
+        className="ui compact button description-toggle"
         onClick={[Function]}
       >
         Show Less
